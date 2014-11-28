@@ -68,7 +68,7 @@
     <dependency>
       <groupId>${pgkGroupId}</groupId>
       <artifactId>halbuilder-core</artifactId>
-      <version>4.0.3</version>
+      <version>${core.version}</version>
     </dependency>
     <dependency>
       <groupId>${pgkGroupId}</groupId>
@@ -120,7 +120,10 @@
             </_exportcontents>
             <Import-Package>
               org.jdom2.*;resolution:=optional,
-                            *
+              com.google.common.base.*;version=17.0,
+              com.google.common.collect.*;version=17.0,
+              com.google.common.io.*;version=17.0,
+              *
             </Import-Package>
           </instructions>
         </configuration>
