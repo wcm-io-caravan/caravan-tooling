@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  wcm.io
+  %%
+  Copyright (C) 2014 wcm.io
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.wcm.maven</groupId>
+    <artifactId>io.wcm.maven.global-parent</artifactId>
+    <version>5-SNAPSHOT</version>
+    <relativePath />
+  </parent>
+
+  <groupId>io.wcm.dromas.maven</groupId>
+  <artifactId>io.wcm.dromas.maven.dromas-global-parent</artifactId>
+  <version>0.2.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>io.wcm.dromas.maven.dromas-global-parent</name>
+  <description>Global parent for Maven artifact hierarchy for wcm.io Dromas projects. Defines plugins and general Maven settings.</description>
+
+  <scm>
+    <connection>scm:git:git@github.com:wcm-io/wcm-io-dromas.git</connection>
+    <developerConnection>scm:git:git@github.com:wcm-io/wcm-io-dromas.git</developerConnection>
+    <url>https://github.com/wcm-io/wcm-io-dromas</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+
+    <!-- Target Java 8 to support new language features like Lambda expressions -->
+    <build.compiler.source>1.8</build.compiler.source>
+    <build.compiler.target>1.8</build.compiler.target>
+
+    <!-- Default launchpad parameters -->
+    <launchpad.url>http://localhost:8080</launchpad.url>
+    <launchpad.user>admin</launchpad.user>
+    <launchpad.password>admin</launchpad.password>
+
+  </properties>
+
+  <dependencies>
+
+    <!-- SCR and OSGi annotations -->
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.scr.annotations</artifactId>
+      <version>1.9.8</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation</artifactId>
+      <version>6.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- OSGi runtime -->
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>4.3.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+      <version>4.3.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <!-- Backport Java 8 language features to JDK 1.7 using bytecode manipulation -->
+      <plugin>
+        <groupId>net.orfjackal.retrolambda</groupId>
+        <artifactId>retrolambda-maven-plugin</artifactId>
+        <version>1.8.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>process-main</goal>
+              <goal>process-test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Make sure to not use non Java 1.7 API calls -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>1.12</version>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java17</artifactId>
+            <version>1.0</version>
+          </signature>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- release plugin (only for this pom) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <inherited>false</inherited>
+      </plugin>
+
+    </plugins>
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.5.3</version>
+          <extensions>true</extensions>
+          <configuration>
+            <instructions>
+              <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            </instructions>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-scr-plugin</artifactId>
+          <version>1.20.0</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>maven-sling-plugin</artifactId>
+          <version>2.1.0</version>
+          <!-- Default configuration for deploying bundles into running Launchpad instance -->
+          <configuration>
+            <slingUrl>${launchpad.url}/system/console</slingUrl>
+            <user>${launchpad.user}</user>
+            <password>${launchpad.password}</password>
+            <mountByFS>false</mountByFS>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>io.wcm.maven.plugins</groupId>
+          <artifactId>cq-maven-plugin</artifactId>
+          <version>1.0.2</version>
+          <configuration>
+            <slingPluginVersion>2.1.0</slingPluginVersion>
+            <slingConsoleUrl>${launchpad.url}/system/console</slingConsoleUrl>
+            <slingConsoleUser>${launchpad.user}</slingConsoleUser>
+            <slingConsolePassword>${launchpad.password}</slingConsolePassword>
+          </configuration>
+        </plugin>
+
+      </plugins>
+
+    </pluginManagement>
+
+  </build>
+
+  <profiles>
+
+    <!-- profile used for building releases and deployment to sonatype/maven central -->
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <!-- sign the build -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <inherited>false</inherited>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- configure staging process at sonatype.-->
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <inherited>false</inherited>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <!-- Deployed artifacts should go to staging to be reviewed before publish -->
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+    <profile>
+      <id>only-eclipse</id>
+      <activation>
+        <property>
+          <name>m2e.version</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>1.0.0</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>maven-sling-plugin</artifactId>
+                        <versionRange>[2.1.0,)</versionRange>
+                        <goals>
+                          <goal>validate</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>net.orfjackal.retrolambda</groupId>
+                        <artifactId>retrolambda-maven-plugin</artifactId>
+                        <versionRange>[1.8.0,)</versionRange>
+                        <goals>
+                          <goal>process-main</goal>
+                          <goal>process-test</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+
+  </profiles>
+
+</project>
