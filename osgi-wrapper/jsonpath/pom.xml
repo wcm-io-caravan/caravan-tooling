@@ -57,6 +57,17 @@
       <artifactId>${pkgArtifactId}</artifactId>
       <version>${pkgVersion}</version>
     </dependency>
+
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>json-smart</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>asm</artifactId>
+      <version>1.0.2</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -73,7 +84,8 @@
             <!-- use _exportcontents instead of Export-Package to avoid conflict with Embed-Dependency an inline=true -->
             <_exportcontents>
               com.jayway.jsonpath;version=${osgiVersion},
-              com.jayway.jsonpath.spi.*;version=${osgiVersion}
+              com.jayway.jsonpath.spi.*;version=${osgiVersion},
+              com.jayway.jsonpath.internal.spi.*;version=${osgiVersion}
             </_exportcontents>
             <Import-Package>
               com.fasterxml.jackson.*;resolution:=optional,
