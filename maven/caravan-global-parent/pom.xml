@@ -29,18 +29,18 @@
     <relativePath />
   </parent>
 
-  <groupId>io.wcm.dromas.maven</groupId>
-  <artifactId>io.wcm.dromas.maven.dromas-global-parent</artifactId>
+  <groupId>io.wcm.caravan.maven</groupId>
+  <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
   <version>0.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>io.wcm.dromas.maven.dromas-global-parent</name>
-  <description>Global parent for Maven artifact hierarchy for wcm.io Dromas projects. Defines plugins and general Maven settings.</description>
+  <name>io.wcm.caravan.maven.caravan-global-parent</name>
+  <description>Global parent for Maven artifact hierarchy for wcm.io Caravan projects. Defines plugins and general Maven settings.</description>
 
   <scm>
-    <connection>scm:git:git@github.com:wcm-io/wcm-io-dromas.git</connection>
-    <developerConnection>scm:git:git@github.com:wcm-io/wcm-io-dromas.git</developerConnection>
-    <url>https://github.com/wcm-io/wcm-io-dromas</url>
+    <connection>scm:git:git@github.com:wcm-io/wcm-io-caravan.git</connection>
+    <developerConnection>scm:git:git@github.com:wcm-io/wcm-io-caravan.git</developerConnection>
+    <url>https://github.com/wcm-io/wcm-io-caravan</url>
     <tag>HEAD</tag>
   </scm>
 
