@@ -96,7 +96,7 @@
       <plugin>
         <groupId>net.orfjackal.retrolambda</groupId>
         <artifactId>retrolambda-maven-plugin</artifactId>
-        <version>1.8.0</version>
+        <version>1.8.1</version>
         <executions>
           <execution>
             <goals>
@@ -111,7 +111,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <version>1.12</version>
+        <version>1.13</version>
         <configuration>
           <signature>
             <groupId>org.codehaus.mojo.signature</groupId>
@@ -121,7 +121,7 @@
         </configuration>
         <executions>
           <execution>
-            <phase>test</phase>
+            <phase>verify</phase>
             <goals>
               <goal>check</goal>
             </goals>
