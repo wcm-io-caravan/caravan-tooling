@@ -26,6 +26,8 @@ import io.wcm.caravan.maven.plugins.haldocs.model.LinkRelation;
 import io.wcm.caravan.maven.plugins.haldocs.model.Service;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.net.URLClassLoader;
 import java.util.stream.Collectors;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -70,8 +72,11 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
+      // get classloader for all "compile" dependencies
+      ClassLoader compileClassLoader = URLClassLoader.newInstance(getCompileClasspathElementURLs());
+
       // generate HTML documentation for service
-      Service service = getServiceInfos();
+      Service service = getServiceInfos(compileClassLoader);
       ServiceDocGenerator generator = new ServiceDocGenerator();
       generator.generate(service, getGeneratedResourcesDirectory());
 
@@ -87,7 +92,7 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
    * Get service infos from current maven project.
    * @return Service
    */
-  private Service getServiceInfos() {
+  private Service getServiceInfos(ClassLoader compileClassLoader) {
     Service service = new Service();
 
     // get some service properties from pom
@@ -107,17 +112,17 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
       service.setDescriptionMarkup(serviceInfo.getComment());
       service.setLinkRelations(serviceInfo.getFields().stream()
           .filter(field -> hasAnnotation(field, LinkRelationDoc.class))
-          .map(this::toLinkRelation)
+          .map(field -> toLinkRelation(serviceInfo, field, compileClassLoader))
           .collect(Collectors.toList()));
     }
 
     return service;
   }
 
-  private LinkRelation toLinkRelation(JavaField field) {
+  private LinkRelation toLinkRelation(JavaClass javaClazz, JavaField field, ClassLoader compileClassLoader) {
     LinkRelation rel = new LinkRelation();
     rel.setDescriptionMarkup(field.getComment());
-    rel.setRel(field.getInitializationExpression());
+    rel.setRel(getStaticFieldValue(javaClazz, field, compileClassLoader, String.class));
     rel.setJsonSchemaRef(getJsonSchemaRef(field));
     return rel;
   }
@@ -142,6 +147,18 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
     }
     else {
       return null;
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private <T> T getStaticFieldValue(JavaClass javaClazz, JavaField javaField, ClassLoader compileClassLoader, Class<T> fieldType) {
+    try {
+      Class<?> clazz = compileClassLoader.loadClass(javaClazz.getFullyQualifiedName());
+      Field field = clazz.getField(javaField.getName());
+      return (T)field.get(fieldType);
+    }
+    catch (ClassNotFoundException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+      throw new RuntimeException("Unable to get contanst value of field '" + javaClazz.getName() + "#" + javaField.getName() + ":\n" + ex.getMessage(), ex);
     }
   }
 

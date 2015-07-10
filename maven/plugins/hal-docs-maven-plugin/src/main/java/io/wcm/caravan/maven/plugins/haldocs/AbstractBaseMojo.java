@@ -20,7 +20,10 @@
 package io.wcm.caravan.maven.plugins.haldocs;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
@@ -36,6 +39,25 @@ abstract class AbstractBaseMojo extends AbstractMojo {
   protected MavenProject project;
 
   private File generatedResourcesFolder;
+
+  /**
+   * Get a List of URLs of all "compile" dependencies of this project.
+   * @return Class path URLs
+   * @throws DependencyResolutionRequiredException
+   */
+  protected URL[] getCompileClasspathElementURLs() throws DependencyResolutionRequiredException {
+    // build class loader to get classes to generate resources for
+    return project.getCompileClasspathElements().stream()
+        .map(path -> {
+          try {
+            return new File(path).toURI().toURL();
+          }
+          catch (MalformedURLException ex) {
+            throw new RuntimeException(ex);
+          }
+        })
+        .toArray(size -> new URL[size]);
+  }
 
   /**
    * Attach directory with generated resoruces to project to include it in JAR file.

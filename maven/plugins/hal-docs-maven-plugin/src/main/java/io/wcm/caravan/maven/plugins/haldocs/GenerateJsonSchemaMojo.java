@@ -21,8 +21,6 @@ package io.wcm.caravan.maven.plugins.haldocs;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Set;
 
@@ -83,21 +81,11 @@ public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
       }
 
       // build class loader to get classes to generate resources for
-      URL[] urls = project.getCompileClasspathElements().stream()
-          .map(path -> {
-            try {
-              return new File(path).toURI().toURL();
-            }
-            catch (MalformedURLException ex) {
-              throw new RuntimeException(ex);
-            }
-          })
-          .toArray(size -> new URL[size]);
       // set plugin classloader as parent classloader e.g. to support jackson annotations
-      ClassLoader classesClassLoader = URLClassLoader.newInstance(urls, getClass().getClassLoader());
+      ClassLoader compileClassLoader = URLClassLoader.newInstance(getCompileClasspathElementURLs(), getClass().getClassLoader());
 
       // generate schema for all classes that match includes/excludes
-      ClassPath.from(classesClassLoader).getAllClasses().stream()
+      ClassPath.from(compileClassLoader).getAllClasses().stream()
       .filter(info -> isIncluded(info.getName()) && !isExcluded(info.getName()))
       .map(info -> info.load())
       .forEach(this::generateSchema);
