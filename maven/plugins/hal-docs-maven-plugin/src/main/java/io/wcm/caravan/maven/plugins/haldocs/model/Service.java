@@ -65,4 +65,8 @@ public class Service {
     this.linkRelations = linkRelations;
   }
 
+  public String getFilename() {
+    return "index.html";
+  }
+
 }

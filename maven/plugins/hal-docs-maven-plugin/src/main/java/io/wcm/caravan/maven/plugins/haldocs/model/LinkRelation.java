@@ -21,6 +21,8 @@ package io.wcm.caravan.maven.plugins.haldocs.model;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Describes a HAL link relation.
  */
@@ -61,6 +63,10 @@ public class LinkRelation {
 
   public void setEmbeddedResourcesLinkRelations(List<LinkRelation> embeddedResourcesLinkRelations) {
     this.embeddedResourcesLinkRelations = embeddedResourcesLinkRelations;
+  }
+
+  public String getFilename() {
+    return "rel_" + StringUtils.replace(getRel(), ":", "-") + ".html";
   }
 
 }

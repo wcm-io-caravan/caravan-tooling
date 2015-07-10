@@ -48,8 +48,8 @@ import com.google.common.reflect.ClassPath.ResourceInfo;
  */
 public class ServiceDocGenerator {
 
-  private static final String CLASSPATH_TEMPLATES = "TEMPLATE-INF/templates";
-  private static final String CLASSPATH_FRONTEND = "TEMPLATE-INF/frontend";
+  private static final String CLASSPATH_TEMPLATES = "HALDOCS-TEMPLATE-INF/templates";
+  private static final String CLASSPATH_FRONTEND = "HALDOCS-TEMPLATE-INF/frontend";
 
   private final Handlebars handlebars;
   private final Template serviceTemplate;
@@ -64,7 +64,8 @@ public class ServiceDocGenerator {
   public ServiceDocGenerator() throws IOException {
     TemplateLoader templateLoader = new ClassPathTemplateLoader("/" + CLASSPATH_TEMPLATES, "");
     handlebars = new Handlebars(templateLoader);
-    serviceTemplate = handlebars.compile("index.html.hbs");
+
+    serviceTemplate = handlebars.compile("service.html.hbs");
     linkRelationTemplate = handlebars.compile("linkRelation.html.hbs");
 
     classPath = ClassPath.from(getClass().getClassLoader());
@@ -80,21 +81,37 @@ public class ServiceDocGenerator {
     copyFrontend(targetDir);
   }
 
+  /**
+   * Generate HTML files.
+   * @param service Service
+   * @param targetDir Target directory
+   */
   private void generateHtml(Service service, File targetDir) {
     generateServiceHtml(service, targetDir);
     service.getLinkRelations().forEach(rel -> generateLinkRelationHtml(service, rel, targetDir));
   }
 
+  /**
+   * Generate HTML file for service.
+   * @param service Service
+   * @param targetDir Target directory
+   */
   private void generateServiceHtml(Service service, File targetDir) {
-    File targetFile = new File(targetDir, getServiceFilename(service));
+    File targetFile = new File(targetDir, service.getFilename());
     Map<String, Object> model = ImmutableMap.<String, Object>builder()
         .put("service", service)
         .build();
     generateTemplatedFile(model, serviceTemplate, targetFile);
   }
 
+  /**
+   * Generate HTML file for link relation.
+   * @param service Service
+   * @param linkRelation Link relation
+   * @param targetDir Target directory
+   */
   private void generateLinkRelationHtml(Service service, LinkRelation linkRelation, File targetDir) {
-    File targetFile = new File(targetDir, getLinkRelationFilename(linkRelation));
+    File targetFile = new File(targetDir, linkRelation.getFilename());
     Map<String, Object> model = ImmutableMap.<String, Object>builder()
         .put("service", service)
         .put("linkRelation", linkRelation)
@@ -102,7 +119,14 @@ public class ServiceDocGenerator {
     generateTemplatedFile(model, linkRelationTemplate, targetFile);
   }
 
+  /**
+   * Generate templated file with handlebars
+   * @param model Model
+   * @param template Template
+   * @param targetFile Target file
+   */
   private void generateTemplatedFile(Map<String, Object> model, Template template, File targetFile) {
+    ensureDirectoryExists(targetFile);
     try (Writer writer = new FileWriterWithEncoding(targetFile, CharEncoding.UTF_8)) {
       template.apply(model, writer);
     }
@@ -111,35 +135,43 @@ public class ServiceDocGenerator {
     }
   }
 
+  /**
+   * Copy all static frontend resources
+   * @param targetDir Target directory
+   */
   private void copyFrontend(File targetDir) {
     classPath.getResources().stream()
     .filter(info -> StringUtils.startsWith(info.getResourceName(), CLASSPATH_FRONTEND))
     .forEach(info -> copyFrontendFile(info, targetDir));
   }
 
+  /**
+   * Copy one static frontend resource file
+   * @param resourceInfo Resource
+   * @param targetDir Target directory
+   */
   private void copyFrontendFile(ResourceInfo resourceInfo, File targetDir) {
     String relativePath = StringUtils.substringAfter(resourceInfo.getResourceName(), CLASSPATH_FRONTEND);
     File targetFile = new File(targetDir, relativePath);
-    try (InputStream is = resourceInfo.url().openStream()) {
-      File directory = targetFile.getParentFile();
-      if (!directory.exists()) {
-        directory.mkdirs();
-      }
-      try (OutputStream os = new FileOutputStream(targetFile)) {
-        IOUtils.copy(is, os);
-      }
+    ensureDirectoryExists(targetFile);
+    try (InputStream is = resourceInfo.url().openStream();
+        OutputStream os = new FileOutputStream(targetFile)) {
+      IOUtils.copy(is, os);
     }
     catch (IOException ex) {
       throw new RuntimeException("Error copying file " + resourceInfo.getResourceName() + " to " + targetFile.getPath(), ex);
     }
   }
 
-  private String getServiceFilename(Service service) {
-    return "index.html";
-  }
-
-  private String getLinkRelationFilename(LinkRelation linkRelation) {
-    return "rel_" + StringUtils.replace(linkRelation.getRel(), ":", "$") + ".html";
+  /**
+   * Ensure directory of file exists, creates it if not.
+   * @param file File
+   */
+  private void ensureDirectoryExists(File file) {
+    File parent = file.getParentFile();
+    if (!parent.exists()) {
+      parent.mkdirs();
+    }
   }
 
 }
