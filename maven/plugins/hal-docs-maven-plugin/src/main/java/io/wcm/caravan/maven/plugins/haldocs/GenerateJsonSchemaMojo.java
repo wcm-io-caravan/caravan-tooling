@@ -94,7 +94,7 @@ public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
       addResource(getGeneratedResourcesDirectory().getPath(), target);
     }
     catch (Throwable ex) {
-      throw new MojoExecutionException("Generationg JSON Schema files failed: " + ex.getMessage(), ex);
+      throw new MojoExecutionException("Generating JSON Schema files failed: " + ex.getMessage(), ex);
     }
   }
 

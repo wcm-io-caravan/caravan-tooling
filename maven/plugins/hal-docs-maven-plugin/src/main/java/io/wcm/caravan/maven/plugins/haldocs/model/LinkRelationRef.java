@@ -28,12 +28,12 @@ public class LinkRelationRef implements Comparable<LinkRelationRef> {
 
   private final String rel;
   private final String description;
-  private final Service service;
+  private final LinkRelation linkRelation;
 
-  LinkRelationRef(String rel, String description, Service service) {
+  LinkRelationRef(String rel, String description, LinkRelation linkRelation) {
     this.rel = rel;
     this.description = description;
-    this.service = service;
+    this.linkRelation = linkRelation;
   }
 
   /**
@@ -50,9 +50,20 @@ public class LinkRelationRef implements Comparable<LinkRelationRef> {
     if (StringUtils.isNotBlank(this.description)) {
       return this.description;
     }
-    LinkRelation linkRelation = getLinkRelation();
-    if (linkRelation != null) {
-      return linkRelation.getDescriptionMarkup();
+    LinkRelation referencedlinkRelation = getLinkRelation();
+    if (referencedlinkRelation != null) {
+      return referencedlinkRelation.getDescriptionMarkup();
+    }
+    return null;
+  }
+
+  /**
+   * @return Filename of referenced link relation
+   */
+  public String getFilename() {
+    LinkRelation referencedlinkRelation = getLinkRelation();
+    if (referencedlinkRelation != null) {
+      return referencedlinkRelation.getFilename();
     }
     return null;
   }
@@ -61,8 +72,8 @@ public class LinkRelationRef implements Comparable<LinkRelationRef> {
    * @return Link relation
    */
   public LinkRelation getLinkRelation() {
-    return service.getLinkRelations().stream()
-        .filter(linkRelation -> StringUtils.equals(linkRelation.getRel(), rel))
+    return linkRelation.getService().getLinkRelations().stream()
+        .filter(item -> StringUtils.equals(item.getRel(), rel))
         .findFirst().orElse(null);
   }
 

@@ -77,14 +77,14 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
 
       // generate HTML documentation for service
       Service service = getServiceInfos(compileClassLoader);
-      ServiceDocGenerator generator = new ServiceDocGenerator();
+      ServiceDocGenerator generator = new ServiceDocGenerator(msg -> getLog().info(msg));
       generator.generate(service, getGeneratedResourcesDirectory());
 
       // add as resources to classpath
       addResource(getGeneratedResourcesDirectory().getPath(), target);
     }
     catch (Throwable ex) {
-      throw new MojoExecutionException("Generationg JSON Schema files failed: " + ex.getMessage(), ex);
+      throw new MojoExecutionException("Generating HAL documentation failed: " + ex.getMessage(), ex);
     }
   }
 

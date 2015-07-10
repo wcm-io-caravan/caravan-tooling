@@ -26,15 +26,18 @@ import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ServiceDocGeneratorTest {
 
   private ServiceDocGenerator underTest;
+  private static final Logger log = LoggerFactory.getLogger(ServiceDocGeneratorTest.class);
 
   @Before
   public void setUp() throws Exception {
-    underTest = new ServiceDocGenerator();
+    underTest = new ServiceDocGenerator(msg -> log.info(msg));
   }
 
   @Test

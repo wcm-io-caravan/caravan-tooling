@@ -75,7 +75,7 @@ public class LinkRelation implements Comparable<LinkRelation> {
    * @param nestedDescription Optional description for describing the link relation in context of the parent link relation.
    */
   public void addNestedLinkRelation(String nestedRel, String nestedDescription) {
-    this.nestedRels.add(new LinkRelationRef(nestedRel, nestedDescription, service));
+    this.nestedRels.add(new LinkRelationRef(nestedRel, nestedDescription, this));
   }
 
   /**
@@ -87,6 +87,10 @@ public class LinkRelation implements Comparable<LinkRelation> {
 
   void setService(Service service) {
     this.service = service;
+  }
+
+  Service getService() {
+    return this.service;
   }
 
   @Override

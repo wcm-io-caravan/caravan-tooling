@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.FileWriterWithEncoding;
@@ -57,18 +58,22 @@ public class ServiceDocGenerator {
 
   private final ClassPath classPath;
 
+  private final Consumer<String> logCallback;
+
   /**
    * Initialize generator.
    * @throws IOException
    */
-  public ServiceDocGenerator() throws IOException {
+  public ServiceDocGenerator(Consumer<String> logCallback) throws IOException {
     TemplateLoader templateLoader = new ClassPathTemplateLoader("/" + CLASSPATH_TEMPLATES, "");
-    handlebars = new Handlebars(templateLoader);
+    this.handlebars = new Handlebars(templateLoader);
 
-    serviceTemplate = handlebars.compile("service.html.hbs");
-    linkRelationTemplate = handlebars.compile("linkRelation.html.hbs");
+    this.serviceTemplate = handlebars.compile("service.html.hbs");
+    this.linkRelationTemplate = handlebars.compile("linkRelation.html.hbs");
 
-    classPath = ClassPath.from(getClass().getClassLoader());
+    this.classPath = ClassPath.from(getClass().getClassLoader());
+
+    this.logCallback = logCallback;
   }
 
   /**
@@ -129,6 +134,7 @@ public class ServiceDocGenerator {
     ensureDirectoryExists(targetFile);
     try (Writer writer = new FileWriterWithEncoding(targetFile, CharEncoding.UTF_8)) {
       template.apply(model, writer);
+      logCallback.accept("Generated " + targetFile.getName());
     }
     catch (IOException ex) {
       throw new RuntimeException("Unable to generate file: " + targetFile.getPath(), ex);
