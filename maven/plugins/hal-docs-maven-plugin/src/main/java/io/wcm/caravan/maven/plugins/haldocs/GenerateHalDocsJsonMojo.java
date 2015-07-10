@@ -21,9 +21,9 @@ package io.wcm.caravan.maven.plugins.haldocs;
 
 import io.wcm.caravan.commons.haldocs.annotations.LinkRelationDoc;
 import io.wcm.caravan.commons.haldocs.annotations.ServiceDoc;
+import io.wcm.caravan.commons.haldocs.model.LinkRelation;
+import io.wcm.caravan.commons.haldocs.model.Service;
 import io.wcm.caravan.maven.plugins.haldocs.generator.ServiceDocGenerator;
-import io.wcm.caravan.maven.plugins.haldocs.model.LinkRelation;
-import io.wcm.caravan.maven.plugins.haldocs.model.Service;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -37,16 +37,18 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.JavaAnnotatedElement;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
 
 /**
- * Generates HAL documentation for service.
+ * Generates HAL documentation JSON files for service.
  */
-@Mojo(name = "generate-hal-docs", defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresProject = true, threadSafe = true)
-public class GenerateHalDocsMojo extends AbstractBaseMojo {
+@Mojo(name = "generate-hal-docs-json", defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresProject = true, threadSafe = true)
+public class GenerateHalDocsJsonMojo extends AbstractBaseMojo {
 
   /**
    * Paths containing the java source files.
@@ -69,6 +71,16 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
   @Parameter(defaultValue = "generated-hal-docs-resources")
   private String generatedResourcesDirectory;
 
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  static {
+    // ensure only field serialization is used for jackson
+    OBJECT_MAPPER.setVisibility(OBJECT_MAPPER.getSerializationConfig().getDefaultVisibilityChecker()
+        .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+        .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
+        .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
+        .withCreatorVisibility(JsonAutoDetect.Visibility.NONE));
+  }
+
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
@@ -77,6 +89,9 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
 
       // generate HTML documentation for service
       Service service = getServiceInfos(compileClassLoader);
+
+      // generate JSON for service info
+
       ServiceDocGenerator generator = new ServiceDocGenerator(msg -> getLog().info(msg));
       generator.generate(service, getGeneratedResourcesDirectory());
 
