@@ -2,7 +2,7 @@
  * #%L
  * wcm.io
  * %%
- * Copyright (C) 2014 wcm.io
+ * Copyright (C) 2015 wcm.io
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.maven.plugins.i18n;
+package io.wcm.caravan.maven.plugins.haldocs;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,9 +44,10 @@ import com.google.common.reflect.ClassPath;
 
 /**
  * Generates JSON schema files for Java POJOs using Jackson 'jackson-module-jsonSchema'.
+ * The generated files are attached as resources and included in the JAR file.
  */
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresProject = true, threadSafe = true)
-public class GenerateMojo extends AbstractMojo {
+@Mojo(name = "generate-json-schema", defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresProject = true, threadSafe = true)
+public class GenerateJsonSchemaMojo extends AbstractMojo {
 
   /**
    * Paths containing the class files to generate JSON schema for.
