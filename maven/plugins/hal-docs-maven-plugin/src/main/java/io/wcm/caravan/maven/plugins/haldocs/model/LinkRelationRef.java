@@ -26,55 +26,32 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class LinkRelationRef implements Comparable<LinkRelationRef> {
 
-  private final String rel;
-  private final String description;
-  private final LinkRelation linkRelation;
+  private String rel;
+  private String descriptionMarkup;
+  private String filename;
 
-  LinkRelationRef(String rel, String description, LinkRelation linkRelation) {
-    this.rel = rel;
-    this.description = description;
-    this.linkRelation = linkRelation;
-  }
-
-  /**
-   * @return Link relation name.
-   */
   public String getRel() {
     return this.rel;
   }
 
-  /**
-   * @return Link relation description (with fallback to the description from the referenced relation).
-   */
+  public void setRel(String rel) {
+    this.rel = rel;
+  }
+
   public String getDescriptionMarkup() {
-    if (StringUtils.isNotBlank(this.description)) {
-      return this.description;
-    }
-    LinkRelation referencedlinkRelation = getLinkRelation();
-    if (referencedlinkRelation != null) {
-      return referencedlinkRelation.getDescriptionMarkup();
-    }
-    return null;
+    return this.descriptionMarkup;
   }
 
-  /**
-   * @return Filename of referenced link relation
-   */
+  public void setDescriptionMarkup(String descriptionMarkup) {
+    this.descriptionMarkup = descriptionMarkup;
+  }
+
   public String getFilename() {
-    LinkRelation referencedlinkRelation = getLinkRelation();
-    if (referencedlinkRelation != null) {
-      return referencedlinkRelation.getFilename();
-    }
-    return null;
+    return this.filename;
   }
 
-  /**
-   * @return Link relation
-   */
-  public LinkRelation getLinkRelation() {
-    return linkRelation.getService().getLinkRelations().stream()
-        .filter(item -> StringUtils.equals(item.getRel(), rel))
-        .findFirst().orElse(null);
+  public void setFilename(String filename) {
+    this.filename = filename;
   }
 
   @Override

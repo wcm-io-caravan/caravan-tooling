@@ -117,6 +117,9 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
       .forEach(service::addLinkRelation);
     }
 
+    // resolve link relations
+    service.resolve();
+
     return service;
   }
 

@@ -19,10 +19,9 @@
  */
 package io.wcm.caravan.maven.plugins.haldocs.model;
 
-import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,7 +34,6 @@ public class LinkRelation implements Comparable<LinkRelation> {
   private String descriptionMarkup;
   private String jsonSchemaRef;
   private SortedSet<LinkRelationRef> nestedRels = new TreeSet<>();
-  private Service service;
 
   public String getRel() {
     return this.rel;
@@ -64,10 +62,8 @@ public class LinkRelation implements Comparable<LinkRelation> {
   /**
    * @return Get link relations of embedded resources.
    */
-  public List<LinkRelationRef> getNestedLinkRelations() {
-    return nestedRels.stream()
-        .filter(ref -> ref.getLinkRelation() != null)
-        .collect(Collectors.toList());
+  public Set<LinkRelationRef> getNestedLinkRelations() {
+    return nestedRels;
   }
 
   /**
@@ -75,7 +71,10 @@ public class LinkRelation implements Comparable<LinkRelation> {
    * @param nestedDescription Optional description for describing the link relation in context of the parent link relation.
    */
   public void addNestedLinkRelation(String nestedRel, String nestedDescription) {
-    this.nestedRels.add(new LinkRelationRef(nestedRel, nestedDescription, this));
+    LinkRelationRef ref = new LinkRelationRef();
+    ref.setRel(nestedRel);
+    ref.setDescriptionMarkup(nestedDescription);
+    this.nestedRels.add(ref);
   }
 
   /**
@@ -83,14 +82,6 @@ public class LinkRelation implements Comparable<LinkRelation> {
    */
   public String getFilename() {
     return "rel-" + StringUtils.replace(getRel(), ":", "-") + ".html";
-  }
-
-  void setService(Service service) {
-    this.service = service;
-  }
-
-  Service getService() {
-    return this.service;
   }
 
   @Override

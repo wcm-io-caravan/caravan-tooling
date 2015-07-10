@@ -19,9 +19,12 @@
  */
 package io.wcm.caravan.maven.plugins.haldocs.model;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 
@@ -67,7 +70,6 @@ public class Service {
    * @param linkRelation Link relation to add
    */
   public void addLinkRelation(LinkRelation linkRelation) {
-    linkRelation.setService(this);
     this.linkRelations.add(linkRelation);
   }
 
@@ -76,6 +78,37 @@ public class Service {
    */
   public String getFilename() {
     return "index.html";
+  }
+
+  /**
+   * Resolves all nested link relations.
+   */
+  public void resolve() {
+    linkRelations.forEach(this::resolve);
+  }
+
+  /**
+   * Iterates over nested link relations. If they are valid filename is set and decription inherited (if empty).
+   * Invalid ones are removed.
+   * @param rel Link relations
+   */
+  private void resolve(LinkRelation rel) {
+    Iterator<LinkRelationRef> refs = rel.getNestedLinkRelations().iterator();
+    while (refs.hasNext()) {
+      LinkRelationRef ref = refs.next();
+      LinkRelation referncedRel = linkRelations.stream()
+          .filter(item -> StringUtils.equals(item.getRel(), ref.getRel()))
+          .findFirst().orElse(null);
+      if (referncedRel == null) {
+        refs.remove();
+      }
+      else {
+        ref.setFilename(referncedRel.getFilename());
+        if (StringUtils.isBlank(ref.getDescriptionMarkup())) {
+          ref.setDescriptionMarkup(referncedRel.getDescriptionMarkup());
+        }
+      }
+    }
   }
 
 }
