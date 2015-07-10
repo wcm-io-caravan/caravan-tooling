@@ -22,10 +22,13 @@ package io.wcm.caravan.maven.plugins.haldocs;
 import io.wcm.caravan.commons.haldocs.annotations.LinkRelationDoc;
 import io.wcm.caravan.commons.haldocs.annotations.ServiceDoc;
 import io.wcm.caravan.commons.haldocs.impl.HalDocsBundleTracker;
+import io.wcm.caravan.commons.haldocs.impl.ServiceJson;
 import io.wcm.caravan.commons.haldocs.model.LinkRelation;
 import io.wcm.caravan.commons.haldocs.model.Service;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.net.URLClassLoader;
@@ -37,8 +40,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.JavaAnnotatedElement;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -71,16 +72,6 @@ public class GenerateHalDocsJsonMojo extends AbstractBaseMojo {
   @Parameter(defaultValue = "generated-hal-docs-resources")
   private String generatedResourcesDirectory;
 
-  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-  static {
-    // ensure only field serialization is used for jackson
-    OBJECT_MAPPER.setVisibilityChecker(OBJECT_MAPPER.getSerializationConfig().getDefaultVisibilityChecker()
-        .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-        .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-        .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
-        .withCreatorVisibility(JsonAutoDetect.Visibility.NONE));
-  }
-
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
@@ -92,7 +83,9 @@ public class GenerateHalDocsJsonMojo extends AbstractBaseMojo {
 
       // generate JSON for service info
       File jsonFile = new File(getGeneratedResourcesDirectory(), HalDocsBundleTracker.SERVICE_DOC_FILE);
-      OBJECT_MAPPER.writeValue(jsonFile, service);
+      try (OutputStream os = new FileOutputStream(jsonFile)) {
+        ServiceJson.write(service, os);
+      }
 
       // add as resources to classpath
       addResource(getGeneratedResourcesDirectory().getPath(), target);
