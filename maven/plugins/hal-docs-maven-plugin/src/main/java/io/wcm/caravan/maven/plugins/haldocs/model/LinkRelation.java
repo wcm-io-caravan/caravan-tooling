@@ -19,13 +19,12 @@
  */
 package io.wcm.caravan.maven.plugins.haldocs.model;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * Describes a HAL link relation.
@@ -35,7 +34,7 @@ public class LinkRelation implements Comparable<LinkRelation> {
   private String rel;
   private String descriptionMarkup;
   private String jsonSchemaRef;
-  private String[] rels;
+  private SortedSet<LinkRelationRef> nestedRels = new TreeSet<>();
   private Service service;
 
   public String getRel() {
@@ -65,27 +64,18 @@ public class LinkRelation implements Comparable<LinkRelation> {
   /**
    * @return Get link relations of embedded resources.
    */
-  public List<LinkRelation> getEmbeddedResourcesLinkRelations() {
-    if (rels == null) {
-      return ImmutableList.of();
-    }
-    return Arrays.stream(rels)
-        .map(this::lookupLinkRelation)
-        .filter(linkRelation -> linkRelation != null)
+  public List<LinkRelationRef> getNestedLinkRelations() {
+    return nestedRels.stream()
+        .filter(ref -> ref.getLinkRelation() != null)
         .collect(Collectors.toList());
   }
 
-  private LinkRelation lookupLinkRelation(String lookupRel) {
-    return service.getLinkRelations().stream()
-        .filter(linkRelation -> StringUtils.equals(linkRelation.getRel(), lookupRel))
-        .findFirst().orElse(null);
-  }
-
   /**
-   * @param value Link relation names of embeddes resources
+   * @param nestedRel Link relation name.
+   * @param nestedDescription Optional description for describing the link relation in context of the parent link relation.
    */
-  public void setEmbeddedResourcesLinkRelations(String[] value) {
-    this.rels = value;
+  public void addNestedLinkRelation(String nestedRel, String nestedDescription) {
+    this.nestedRels.add(new LinkRelationRef(nestedRel, nestedDescription, service));
   }
 
   /**

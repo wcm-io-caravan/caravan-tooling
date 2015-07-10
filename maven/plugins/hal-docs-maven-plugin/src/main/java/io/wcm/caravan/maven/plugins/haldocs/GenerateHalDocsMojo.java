@@ -29,6 +29,7 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -135,7 +136,7 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
 
     LinkRelationDoc relDoc = getAnnotation(javaClazz, javaField, compileClassLoader, LinkRelationDoc.class);
     rel.setJsonSchemaRef(relDoc.jsonSchema());
-    rel.setEmbeddedResourcesLinkRelations(relDoc.nestedLinkRelations());
+    Arrays.stream(relDoc.nested()).forEach(nested -> rel.addNestedLinkRelation(nested.value(), nested.description()));
 
     return rel;
   }

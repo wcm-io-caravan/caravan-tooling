@@ -70,9 +70,9 @@ public class ServiceDocGeneratorTest {
     rel3.setJsonSchemaRef("schema3.json");
     service.addLinkRelation(rel3);
 
-    rel1.setEmbeddedResourcesLinkRelations(new String[] {
-        rel2.getRel(), rel3.getRel()
-    });
+    rel1.addNestedLinkRelation(rel2.getRel(), "Description for rel1->rel2");
+    rel2.addNestedLinkRelation(rel3.getRel(), null);
+    rel2.addNestedLinkRelation("unknown/invalid", null);
 
     underTest.generate(service, new File("target/documentation-test"));
   }

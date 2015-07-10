@@ -18,7 +18,7 @@
 {{/if}}
 
 
-{{#if linkRelation.embeddedResourcesLinkRelations}}
+{{#if linkRelation.nestedLinkRelations}}
 
 <hr/>
 
@@ -33,7 +33,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each linkRelation.embeddedResourcesLinkRelations}}
+    {{#each linkRelation.nestedLinkRelations}}
     <tr>
       <td><a href="{{this.filename}}"><strong>{{this.rel}}</strong></a></td>
       <td>{{{this.descriptionMarkup}}}</td>
