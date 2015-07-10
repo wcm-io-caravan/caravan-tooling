@@ -26,15 +26,11 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Set;
 
-import org.apache.maven.model.Build;
-import org.apache.maven.model.Resource;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.SelectorUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,7 +43,7 @@ import com.google.common.reflect.ClassPath;
  * The generated files are attached as resources and included in the JAR file.
  */
 @Mojo(name = "generate-json-schema", defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresProject = true, threadSafe = true)
-public class GenerateJsonSchemaMojo extends AbstractMojo {
+public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
 
   /**
    * Paths containing the class files to generate JSON schema for.
@@ -74,12 +70,7 @@ public class GenerateJsonSchemaMojo extends AbstractMojo {
   private String target;
 
   @Parameter(defaultValue = "generated-json-schema-resources")
-  private String generatedResourcesFolderPath;
-
-  @Parameter(property = "project", required = true, readonly = true)
-  private MavenProject project;
-
-  private File generatedResourcesFolder;
+  private String generatedResourcesDirectory;
 
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -112,7 +103,7 @@ public class GenerateJsonSchemaMojo extends AbstractMojo {
       .forEach(this::generateSchema);
 
       // add as resources to classpath
-      addResource(getGeneratedResourcesFolder().getPath(), target);
+      addResource(getGeneratedResourcesDirectory().getPath(), target);
     }
     catch (Throwable ex) {
       throw new MojoExecutionException("Generationg JSON Schema files failed: " + ex.getMessage(), ex);
@@ -140,7 +131,7 @@ public class GenerateJsonSchemaMojo extends AbstractMojo {
 
   private void generateSchema(Class clazz) {
     try {
-      File targetFile = new File(getGeneratedResourcesFolder(), clazz.getName() + ".json");
+      File targetFile = new File(getGeneratedResourcesDirectory(), clazz.getName() + ".json");
       getLog().info("Generate JSON schema: " + targetFile.getName());
       SchemaFactoryWrapper schemaFactory = new SchemaFactoryWrapper();
       OBJECT_MAPPER.acceptJsonFormatVisitor(OBJECT_MAPPER.constructType(clazz), schemaFactory);
@@ -150,19 +141,6 @@ public class GenerateJsonSchemaMojo extends AbstractMojo {
     catch (IOException ex) {
       throw new RuntimeException(ex);
     }
-  }
-
-  private void addResource(String sourceDirectory, String targetPath) {
-
-    // construct resource
-    Resource resource = new Resource();
-    resource.setDirectory(sourceDirectory);
-    resource.setTargetPath(targetPath);
-
-    // add to build
-    Build build = this.project.getBuild();
-    build.addResource(resource);
-    getLog().debug("Added resource: " + resource.getDirectory() + " -> " + resource.getTargetPath());
   }
 
   /**
@@ -178,15 +156,9 @@ public class GenerateJsonSchemaMojo extends AbstractMojo {
     return file.getCanonicalFile();
   }
 
-  private File getGeneratedResourcesFolder() {
-    if (generatedResourcesFolder == null) {
-      String generatedResourcesFolderAbsolutePath = this.project.getBuild().getDirectory() + "/" + generatedResourcesFolderPath;
-      generatedResourcesFolder = new File(generatedResourcesFolderAbsolutePath);
-      if (!generatedResourcesFolder.exists()) {
-        generatedResourcesFolder.mkdirs();
-      }
-    }
-    return generatedResourcesFolder;
+  @Override
+  protected String getGeneratedResourcesDirectoryPath() {
+    return generatedResourcesDirectory;
   }
 
 }
