@@ -21,9 +21,9 @@ package io.wcm.caravan.maven.plugins.haldocs;
 
 import io.wcm.caravan.commons.haldocs.annotations.LinkRelationDoc;
 import io.wcm.caravan.commons.haldocs.annotations.ServiceDoc;
+import io.wcm.caravan.commons.haldocs.impl.HalDocsBundleTracker;
 import io.wcm.caravan.commons.haldocs.model.LinkRelation;
 import io.wcm.caravan.commons.haldocs.model.Service;
-import io.wcm.caravan.maven.plugins.haldocs.generator.ServiceDocGenerator;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -65,7 +65,7 @@ public class GenerateHalDocsJsonMojo extends AbstractBaseMojo {
   /**
    * Relative target path for the generated resources.
    */
-  @Parameter(defaultValue = "HAL-DOCS-INF")
+  @Parameter(defaultValue = HalDocsBundleTracker.DOCS_CLASSPATH_PREFIX)
   private String target;
 
   @Parameter(defaultValue = "generated-hal-docs-resources")
@@ -74,7 +74,7 @@ public class GenerateHalDocsJsonMojo extends AbstractBaseMojo {
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   static {
     // ensure only field serialization is used for jackson
-    OBJECT_MAPPER.setVisibility(OBJECT_MAPPER.getSerializationConfig().getDefaultVisibilityChecker()
+    OBJECT_MAPPER.setVisibilityChecker(OBJECT_MAPPER.getSerializationConfig().getDefaultVisibilityChecker()
         .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
         .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
         .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
@@ -91,9 +91,8 @@ public class GenerateHalDocsJsonMojo extends AbstractBaseMojo {
       Service service = getServiceInfos(compileClassLoader);
 
       // generate JSON for service info
-
-      ServiceDocGenerator generator = new ServiceDocGenerator(msg -> getLog().info(msg));
-      generator.generate(service, getGeneratedResourcesDirectory());
+      File jsonFile = new File(getGeneratedResourcesDirectory(), HalDocsBundleTracker.SERVICE_DOC_FILE);
+      OBJECT_MAPPER.writeValue(jsonFile, service);
 
       // add as resources to classpath
       addResource(getGeneratedResourcesDirectory().getPath(), target);

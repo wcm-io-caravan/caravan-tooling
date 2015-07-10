@@ -19,8 +19,8 @@
  */
 package io.wcm.caravan.maven.plugins.haldocs.generator;
 
-import io.wcm.caravan.maven.plugins.haldocs.model.LinkRelation;
-import io.wcm.caravan.maven.plugins.haldocs.model.Service;
+import io.wcm.caravan.commons.haldocs.model.LinkRelation;
+import io.wcm.caravan.commons.haldocs.model.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;

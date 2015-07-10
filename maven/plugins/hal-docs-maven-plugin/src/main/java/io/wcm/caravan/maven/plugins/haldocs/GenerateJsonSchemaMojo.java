@@ -85,7 +85,7 @@ public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
       ClassLoader compileClassLoader = URLClassLoader.newInstance(getCompileClasspathElementURLs(), getClass().getClassLoader());
 
       // generate schema for all classes that match includes/excludes
-      ClassPath.from(compileClassLoader).getAllClasses().stream()
+      ClassPath.from(compileClassLoader).getTopLevelClasses().stream()
       .filter(info -> isIncluded(info.getName()) && !isExcluded(info.getName()))
       .map(info -> info.load())
       .forEach(this::generateSchema);
