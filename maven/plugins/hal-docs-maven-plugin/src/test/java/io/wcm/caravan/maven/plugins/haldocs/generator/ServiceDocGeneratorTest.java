@@ -27,8 +27,6 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableList;
-
 
 public class ServiceDocGeneratorTest {
 
@@ -58,19 +56,23 @@ public class ServiceDocGeneratorTest {
         + "This is a lengthy description of the relation.</p>"
         + "<p>This is a lengthy description of the relation.</p>");
     rel1.setJsonSchemaRef("schema1.json");
+    service.addLinkRelation(rel1);
 
     LinkRelation rel2 = new LinkRelation();
     rel2.setRel("ns:rel2");
     rel2.setDescriptionMarkup("<p>This is a description of the relation.</p>");
     rel2.setJsonSchemaRef("schema2.json");
+    service.addLinkRelation(rel2);
 
     LinkRelation rel3 = new LinkRelation();
     rel3.setRel("ns:rel3");
     rel3.setDescriptionMarkup("<p>This is a description of the relation.</p>");
     rel3.setJsonSchemaRef("schema3.json");
+    service.addLinkRelation(rel3);
 
-    service.setLinkRelations(ImmutableList.of(rel1, rel2, rel3));
-    rel1.setEmbeddedResourcesLinkRelations(ImmutableList.of(rel2, rel3));
+    rel1.setEmbeddedResourcesLinkRelations(new String[] {
+        rel2.getRel(), rel3.getRel()
+    });
 
     underTest.generate(service, new File("target/documentation-test"));
   }

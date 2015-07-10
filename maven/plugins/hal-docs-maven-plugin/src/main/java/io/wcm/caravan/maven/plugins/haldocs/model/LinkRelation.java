@@ -19,19 +19,24 @@
  */
 package io.wcm.caravan.maven.plugins.haldocs.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.ImmutableList;
 
 /**
  * Describes a HAL link relation.
  */
-public class LinkRelation {
+public class LinkRelation implements Comparable<LinkRelation> {
 
   private String rel;
   private String descriptionMarkup;
   private String jsonSchemaRef;
-  private List<LinkRelation> embeddedResourcesLinkRelations;
+  private String[] rels;
+  private Service service;
 
   public String getRel() {
     return this.rel;
@@ -57,16 +62,59 @@ public class LinkRelation {
     this.jsonSchemaRef = jsonSchemaRef;
   }
 
+  /**
+   * @return Get link relations of embedded resources.
+   */
   public List<LinkRelation> getEmbeddedResourcesLinkRelations() {
-    return this.embeddedResourcesLinkRelations;
+    if (rels == null) {
+      return ImmutableList.of();
+    }
+    return Arrays.stream(rels)
+        .map(this::lookupLinkRelation)
+        .filter(linkRelation -> linkRelation != null)
+        .collect(Collectors.toList());
   }
 
-  public void setEmbeddedResourcesLinkRelations(List<LinkRelation> embeddedResourcesLinkRelations) {
-    this.embeddedResourcesLinkRelations = embeddedResourcesLinkRelations;
+  private LinkRelation lookupLinkRelation(String lookupRel) {
+    return service.getLinkRelations().stream()
+        .filter(linkRelation -> StringUtils.equals(linkRelation.getRel(), lookupRel))
+        .findFirst().orElse(null);
   }
 
+  /**
+   * @param value Link relation names of embeddes resources
+   */
+  public void setEmbeddedResourcesLinkRelations(String[] value) {
+    this.rels = value;
+  }
+
+  /**
+   * @return Filename for generated markup file.
+   */
   public String getFilename() {
-    return "rel_" + StringUtils.replace(getRel(), ":", "-") + ".html";
+    return "rel-" + StringUtils.replace(getRel(), ":", "-") + ".html";
+  }
+
+  void setService(Service service) {
+    this.service = service;
+  }
+
+  @Override
+  public int hashCode() {
+    return rel.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof LinkRelation)) {
+      return false;
+    }
+    return StringUtils.equals(rel, ((LinkRelation)obj).rel);
+  }
+
+  @Override
+  public int compareTo(LinkRelation o) {
+    return StringUtils.defaultString(rel).compareTo(o.getRel());
   }
 
 }

@@ -26,9 +26,9 @@ import io.wcm.caravan.maven.plugins.haldocs.model.LinkRelation;
 import io.wcm.caravan.maven.plugins.haldocs.model.Service;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.net.URLClassLoader;
-import java.util.stream.Collectors;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -38,7 +38,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.JavaAnnotatedElement;
-import com.thoughtworks.qdox.model.JavaAnnotation;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
 
@@ -73,7 +72,7 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
       // get classloader for all "compile" dependencies
-      ClassLoader compileClassLoader = URLClassLoader.newInstance(getCompileClasspathElementURLs());
+      ClassLoader compileClassLoader = URLClassLoader.newInstance(getCompileClasspathElementURLs(), getClass().getClassLoader());
 
       // generate HTML documentation for service
       Service service = getServiceInfos(compileClassLoader);
@@ -110,46 +109,57 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
     // populate further service information from @ServiceDoc class and @LinkRelationDoc fields
     if (serviceInfo != null) {
       service.setDescriptionMarkup(serviceInfo.getComment());
-      service.setLinkRelations(serviceInfo.getFields().stream()
-          .filter(field -> hasAnnotation(field, LinkRelationDoc.class))
-          .map(field -> toLinkRelation(serviceInfo, field, compileClassLoader))
-          .collect(Collectors.toList()));
+
+      serviceInfo.getFields().stream()
+      .filter(field -> hasAnnotation(field, LinkRelationDoc.class))
+      .map(field -> toLinkRelation(serviceInfo, field, compileClassLoader))
+      .forEach(service::addLinkRelation);
     }
 
     return service;
   }
 
-  private LinkRelation toLinkRelation(JavaClass javaClazz, JavaField field, ClassLoader compileClassLoader) {
+  /**
+   * Builds a {@link LinkRelation} from a field definition with {@link LinkRelationDoc} annotation.
+   * @param javaClazz QDox class
+   * @param javaField QDox field
+   * @param compileClassLoader Classloader for compile dependencies
+   * @return Link relation
+   */
+  private LinkRelation toLinkRelation(JavaClass javaClazz, JavaField javaField, ClassLoader compileClassLoader) {
     LinkRelation rel = new LinkRelation();
-    rel.setDescriptionMarkup(field.getComment());
-    rel.setRel(getStaticFieldValue(javaClazz, field, compileClassLoader, String.class));
-    rel.setJsonSchemaRef(getJsonSchemaRef(field));
+
+    rel.setDescriptionMarkup(javaField.getComment());
+
+    rel.setRel(getStaticFieldValue(javaClazz, javaField, compileClassLoader, String.class));
+
+    LinkRelationDoc relDoc = getAnnotation(javaClazz, javaField, compileClassLoader, LinkRelationDoc.class);
+    rel.setJsonSchemaRef(relDoc.jsonSchema());
+    rel.setEmbeddedResourcesLinkRelations(relDoc.nestedLinkRelations());
+
     return rel;
   }
 
-  private String getJsonSchemaRef(JavaField field) {
-    return getAnnotationValue(field, LinkRelationDoc.class, "jsonSchema", String.class);
-  }
-
-  private boolean hasAnnotation(JavaAnnotatedElement clazz, Class<?> annotationClazz) {
+  /**
+   * Checks if the given element has an annotation set.
+   * @param clazz QDox class
+   * @param annotationClazz Annotation class
+   * @return true if annotation is present
+   */
+  private boolean hasAnnotation(JavaAnnotatedElement clazz, Class<? extends Annotation> annotationClazz) {
     return clazz.getAnnotations().stream()
         .filter(item -> item.getType().isA(annotationClazz.getName()))
         .count() > 0;
   }
 
-  @SuppressWarnings("unchecked")
-  private <T> T getAnnotationValue(JavaAnnotatedElement clazz, Class<?> annotationClazz, String property, Class<T> propertyType) {
-    JavaAnnotation annotation = clazz.getAnnotations().stream()
-        .filter(item -> item.getType().isA(annotationClazz.getName()))
-        .findFirst().orElse(null);
-    if (annotation != null) {
-      return (T)annotation.getNamedParameter(property);
-    }
-    else {
-      return null;
-    }
-  }
-
+  /**
+   * Get constant field value.
+   * @param javaClazz QDox class
+   * @param javaField QDox field
+   * @param compileClassLoader Classloader for compile dependencies
+   * @param fieldType Field type
+   * @return Value
+   */
   @SuppressWarnings("unchecked")
   private <T> T getStaticFieldValue(JavaClass javaClazz, JavaField javaField, ClassLoader compileClassLoader, Class<T> fieldType) {
     try {
@@ -158,6 +168,25 @@ public class GenerateHalDocsMojo extends AbstractBaseMojo {
       return (T)field.get(fieldType);
     }
     catch (ClassNotFoundException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+      throw new RuntimeException("Unable to get contanst value of field '" + javaClazz.getName() + "#" + javaField.getName() + ":\n" + ex.getMessage(), ex);
+    }
+  }
+
+  /**
+   * Get annotation for field.
+   * @param javaClazz QDox class
+   * @param javaField QDox field
+   * @param compileClassLoader Classloader for compile dependencies
+   * @param annotationType Annotation type
+   * @return Annotation of null if not present
+   */
+  private <T extends Annotation> T getAnnotation(JavaClass javaClazz, JavaField javaField, ClassLoader compileClassLoader, Class<T> annotationType) {
+    try {
+      Class<?> clazz = compileClassLoader.loadClass(javaClazz.getFullyQualifiedName());
+      Field field = clazz.getField(javaField.getName());
+      return field.getAnnotation(annotationType);
+    }
+    catch (ClassNotFoundException | NoSuchFieldException | SecurityException | IllegalArgumentException ex) {
       throw new RuntimeException("Unable to get contanst value of field '" + javaClazz.getName() + "#" + javaField.getName() + ":\n" + ex.getMessage(), ex);
     }
   }

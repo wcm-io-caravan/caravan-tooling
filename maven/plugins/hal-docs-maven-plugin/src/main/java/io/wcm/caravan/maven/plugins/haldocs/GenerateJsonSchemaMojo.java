@@ -98,6 +98,11 @@ public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
     }
   }
 
+  /**
+   * Check is class is included.
+   * @param className Class name
+   * @return true if included
+   */
   private boolean isIncluded(String className) {
     if (includes == null || includes.size() == 0) {
       // generate nothing if no include defined - it makes no sense to generate for all classes from classpath
@@ -108,6 +113,11 @@ public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
         .count() > 0;
   }
 
+  /**
+   * Check if class is excluded
+   * @param className Class name
+   * @return true if excluded
+   */
   private boolean isExcluded(String className) {
     if (excludes == null || excludes.size() == 0) {
       return false;
@@ -117,6 +127,10 @@ public class GenerateJsonSchemaMojo extends AbstractBaseMojo {
         .count() == 0;
   }
 
+  /**
+   * Generate JSON schema for given POJO
+   * @param clazz POJO class
+   */
   private void generateSchema(Class clazz) {
     try {
       File targetFile = new File(getGeneratedResourcesDirectory(), clazz.getName() + ".json");

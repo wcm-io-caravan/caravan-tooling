@@ -20,6 +20,8 @@
 package io.wcm.caravan.maven.plugins.haldocs.model;
 
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableList;
 
@@ -31,7 +33,7 @@ public class Service {
   private String serviceId;
   private String name;
   private String descriptionMarkup;
-  private List<LinkRelation> linkRelations = ImmutableList.of();
+  private SortedSet<LinkRelation> linkRelations = new TreeSet<>();
 
   public String getServiceId() {
     return this.serviceId;
@@ -58,13 +60,20 @@ public class Service {
   }
 
   public List<LinkRelation> getLinkRelations() {
-    return this.linkRelations;
+    return ImmutableList.copyOf(this.linkRelations);
   }
 
-  public void setLinkRelations(List<LinkRelation> linkRelations) {
-    this.linkRelations = linkRelations;
+  /**
+   * @param linkRelation Link relation to add
+   */
+  public void addLinkRelation(LinkRelation linkRelation) {
+    linkRelation.setService(this);
+    this.linkRelations.add(linkRelation);
   }
 
+  /**
+   * @return Filename for generated markup file.
+   */
   public String getFilename() {
     return "index.html";
   }
