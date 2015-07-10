@@ -111,13 +111,7 @@
       <scope>compile</scope>
     </dependency>
     
-    <!-- Others -->
-    <dependency>
-      <groupId>com.github.jknack</groupId>
-      <artifactId>handlebars</artifactId>
-      <version>2.2.2</version>
-      <scope>compile</scope>
-    </dependency>
+    <!-- QDox -->
     <dependency>
       <groupId>com.thoughtworks.qdox</groupId>
       <artifactId>qdox</artifactId>
