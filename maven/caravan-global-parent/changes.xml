@@ -25,7 +25,10 @@
 
     <release version="3" date="not released">
       <action type="update" dev="sseifert">
-        Update parent dependency.
+        Update global-parent dependency.
+      </action>
+      <action type="update" dev="sseifert">
+        Update to retrolambda-maven-plugin 2.0.4.
       </action>
     </release>
 
