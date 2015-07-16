@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>9-SNAPSHOT</version>
+    <version>9</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>4-SNAPSHOT</version>
+  <version>4</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
@@ -129,11 +129,19 @@
         </executions>
       </plugin>
 
-      <!-- release plugin (only for this pom) -->
+      <!-- gitflow customization (only for this pom) -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
+        <groupId>external.atlassian.jgitflow</groupId>
+        <artifactId>jgitflow-maven-plugin</artifactId>
         <inherited>false</inherited>
+        <configuration>
+          <!-- Prefix release numbers with artifactId for GIT repo with more than one released artifact -->
+          <flowInitContext>
+            <releaseBranchPrefix>release/${project.artifactId}-</releaseBranchPrefix>
+            <hotfixBranchPrefix>hotfix/${project.artifactId}-</hotfixBranchPrefix>
+            <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+          </flowInitContext>
+        </configuration>
       </plugin>
 
     </plugins>
@@ -205,6 +213,12 @@
     <!-- profile used for building releases and deployment to sonatype/maven central -->
     <profile>
       <id>release</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
       <build>
         <plugins>
           <!-- sign the build -->
