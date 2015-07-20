@@ -478,7 +478,7 @@
           <configuration>
             <instructions>
               <Bundle-Category>wcm.io Caravan</Bundle-Category>
-              <Bundle-Vendor>wcm.io</Bundle-Vendor>
+              <Bundle-Vendor>wcm.io Caravan</Bundle-Vendor>
               <Bundle-Name>wcm.io Caravan ${project.name}</Bundle-Name>
             </instructions>
           </configuration>
