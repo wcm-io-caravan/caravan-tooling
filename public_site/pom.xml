@@ -3,7 +3,7 @@
   #%L
   wcm.io
   %%
-  Copyright (C) 2014 wcm.io
+  Copyright (C) 2015 wcm.io
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -24,29 +24,32 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.wcm.caravan.maven</groupId>
-    <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>4</version>
-    <relativePath/>
+    <groupId>io.wcm.caravan</groupId>
+    <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
+    <version>0.5.5-SNAPSHOT</version>
+    <relativePath>../parent_toplevel/pom.xml</relativePath>
   </parent>
 
   <groupId>io.wcm.caravan</groupId>
-  <artifactId>io.wcm.caravan.tooling</artifactId>
+  <artifactId>public_site</artifactId>
   <version>1</version>
   <packaging>pom</packaging>
 
-  <name>Caravan Tooling Root</name>
+  <name>Public Site</name>
+  <description>Project contains the public website content for the caravan.wcm.io site root.</description>
+  <url>${site.url}</url>
 
-  <modules>
-    <module>maven/caravan-global-parent</module>
-    <module>parent_toplevel</module>
-    <module>public_site</module>
-  </modules>
+  <scm>
+    <connection>scm:git:https://github.com/wcm-io-caravan/caravan-tooling.git</connection>
+    <developerConnection>scm:git:https://github.com/wcm-io-caravan/caravan-tooling.git</developerConnection>
+    <url>https://github.com/wcm-io-caravan/caravan-tooling</url>
+    <tag>HEAD</tag>
+  </scm>
 
   <build>
     <plugins>
 
-      <!-- do not deploy this hierarchy pom into maven repository -->
+      <!-- do not deploy this project into maven repository -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
@@ -55,32 +58,14 @@
         </configuration>
       </plugin>
 
-      <!-- do not generate site for this project -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <skipDeploy>true</skipDeploy>
-        </configuration>
-      </plugin>
-
     </plugins>
-    <pluginManagement>
-      <plugins>
-
-        <!-- license check -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>license-maven-plugin</artifactId>
-          <configuration>
-            <licenseName>apache_v2</licenseName>
-            <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-            <projectName>wcm.io</projectName>
-          </configuration>
-        </plugin>
-
-      </plugins>
-    </pluginManagement>
   </build>
+
+  <distributionManagement>
+    <site>
+      <id>${site.deploy.id}</id>
+      <url>${site.deploy.url}</url>
+    </site>
+  </distributionManagement>
 
 </project>

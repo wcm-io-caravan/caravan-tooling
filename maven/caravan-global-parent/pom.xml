@@ -129,6 +129,17 @@
         </executions>
       </plugin>
 
+      <!-- Do not generate site (only for this pom) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <inherited>false</inherited>
+        <configuration>
+          <skip>true</skip>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+      </plugin>
+
       <!-- gitflow customization (only for this pom) -->
       <plugin>
         <groupId>external.atlassian.jgitflow</groupId>
