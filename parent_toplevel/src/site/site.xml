@@ -45,7 +45,7 @@
       <theme>default</theme>
       <highlightJs>true</highlightJs>
       <highlightJsTheme>github</highlightJsTheme>
-      <absoluteResourceURL>http://wcm.io</absoluteResourceURL>
+      <absoluteResourceURL>http://caravan.wcm.io</absoluteResourceURL>
       <skinAttribution>false</skinAttribution>
       <brand>
         <!-- Brand text in top-left part of the site -->
@@ -109,7 +109,7 @@
     </links>
 
     <breadcrumbs>
-      <item name="wcm.io" href="http://wcm.io" />
+      <item name="wcm.io Caravan" href="http://caravan.wcm.io" />
     </breadcrumbs>
 
     <menu name="Main" inherit="top">
