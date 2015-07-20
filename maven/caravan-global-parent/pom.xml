@@ -36,6 +36,7 @@
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
   <description>Global parent for Maven artifact hierarchy for wcm.io Caravan projects. Defines plugins and general Maven settings.</description>
+  <url>http://caravan.wcm.io/</url>
 
   <scm>
     <connection>scm:git:https://github.com/wcm-io-caravan/caravan-tooling.git</connection>
