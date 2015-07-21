@@ -83,7 +83,7 @@
     <site.url.module.prefix>tooling/parent_toplevel</site.url.module.prefix>
     <site.url>http://caravan.wcm.io</site.url>
     <site.deploy.id>ssh-wcm.io</site.deploy.id>
-    <site.deploy.url>scp://wcm.io:222/var/www/caravan.wcm.io/www/</site.deploy.url>
+    <site.deploy.url>scp://wcmio@wcm.io:222/var/www/caravan.wcm.io/www/</site.deploy.url>
 
   </properties>
 
