@@ -1,5 +1,3 @@
-![Caravan](images/caravan.gif)
-
 ## About wcm.io Caravan
 
 wcm.io Caravan is an Open Source project which provides a JSON Data Pipelining Infrastructure for building RESTful Micro Services.
