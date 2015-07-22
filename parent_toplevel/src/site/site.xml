@@ -129,6 +129,7 @@
       <item name="Commons" href="http://caravan.wcm.io/commons/"/>
       <item name="HAL" href="http://caravan.wcm.io/hal/"/>
       <item name="I/O" href="http://caravan.wcm.io/io/"/>
+      <item name="JAX-RS" href="http://caravan.wcm.io/jaxrs/"/>
       <item name="Pipeline" href="http://caravan.wcm.io/pipeline/"/>
       <item name="Testing" href="http://caravan.wcm.io/testing/"/>
       <item name="Packaging" href="http://caravan.wcm.io/packaging/"/>
