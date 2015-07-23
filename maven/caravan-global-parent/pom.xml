@@ -36,6 +36,7 @@
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
   <description>Global parent for Maven artifact hierarchy for wcm.io Caravan projects. Defines plugins and general Maven settings.</description>
+  <url>http://caravan.wcm.io/</url>
 
   <scm>
     <connection>scm:git:https://github.com/wcm-io-caravan/caravan-tooling.git</connection>
@@ -127,6 +128,17 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Do not generate site (only for this pom) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <inherited>false</inherited>
+        <configuration>
+          <skip>true</skip>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
       </plugin>
 
       <!-- gitflow customization (only for this pom) -->

@@ -36,10 +36,13 @@
   <packaging>pom</packaging>
 
   <name>Caravan Tooling Root</name>
+  <description>Caravan Tooling for Maven.</description>
 
   <modules>
     <module>maven/caravan-global-parent</module>
     <module>parent_toplevel</module>
+    <module>parent</module>
+    <module>public_site</module>
   </modules>
 
   <build>
