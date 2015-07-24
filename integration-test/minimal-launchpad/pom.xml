@@ -85,7 +85,7 @@
         </configuration>
       </plugin>
 
-      <!-- Do not generate eclipse project files -->
+      <!-- do not generate eclipse project files -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
@@ -95,15 +95,6 @@
         </configuration>
       </plugin>
       
-      <!-- do not deploy this hierarchy pom into maven repository -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-
       <!-- do not generate site for this project -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
