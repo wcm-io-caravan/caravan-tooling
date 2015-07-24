@@ -32,5 +32,8 @@
   com.google.guava/guava
 
 [artifacts startLevel=20]
+  # Only needed for streams replacement for Java 7 compatibility
   io.wcm.caravan/io.wcm.caravan.commons.stream
+
+  # This is included to habe a bundle with anonymous web output to ensure launchpad is started for integration tests
   io.wcm.caravan/io.wcm.caravan.hal.browser
