@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Update Handlebars and Jersey dependencies.
       </action>
+      <action type="update" dev="sseifert">
+        Switch back commons-lang3 and Apache HTTP Client versions to those shipped with AEM 6.1.
+      </action>
     </release>
 
     <release version="1.0.0" date="2015-07-24">
