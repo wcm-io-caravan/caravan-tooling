@@ -70,6 +70,17 @@
       <artifactId>org.apache.sling.commons.osgi</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore-osgi</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient-osgi</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
   
   <build>
