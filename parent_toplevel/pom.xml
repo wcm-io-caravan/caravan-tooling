@@ -177,12 +177,12 @@
       <dependency>
         <groupId>io.reactivex</groupId>
         <artifactId>rxjava</artifactId>
-        <version>1.0.11</version>
+        <version>1.0.14</version>
       </dependency>
       <dependency>
         <groupId>io.wcm.osgi.wrapper</groupId>
         <artifactId>io.wcm.osgi.wrapper.rxjava</artifactId>
-        <version>1.0.11-0000</version>
+        <version>1.0.14-0000</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
