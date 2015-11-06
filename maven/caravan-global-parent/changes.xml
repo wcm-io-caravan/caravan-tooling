@@ -25,7 +25,10 @@
 
     <release version="5" date="not released">
       <action type="update" dev="sseifert">
-        Update to maven-bundle-plugin 3.0.0.
+        Update global-parent dependency to 10.
+      </action>
+      <action type="update" dev="sseifert">
+        Update build plugins to latest versions.
       </action>
     </release>
 
