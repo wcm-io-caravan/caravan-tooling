@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Update handy-uri-templates dependency.
       </action>
+      <action type="update" dev="sseifert">
+        Update to caravan-global-parent 5.
+      </action>
     </release>
 
     <release version="1.0.2" date="2015-08-26">
