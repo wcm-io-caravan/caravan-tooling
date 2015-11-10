@@ -28,7 +28,7 @@
         Update handy-uri-templates dependency.
       </action>
       <action type="update" dev="sseifert">
-        Update to caravan-global-parent 5.
+        Update to caravan-global-parent 5, switch from cobertura to jacoco..
       </action>
     </release>
 
