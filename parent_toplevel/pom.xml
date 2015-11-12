@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.caravan.maven</groupId>
     <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>4</version>
+    <version>5-SNAPSHOT</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan</groupId>
   <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Toplevel Parent</name>
@@ -177,12 +177,12 @@
       <dependency>
         <groupId>io.reactivex</groupId>
         <artifactId>rxjava</artifactId>
-        <version>1.0.11</version>
+        <version>1.0.14</version>
       </dependency>
       <dependency>
         <groupId>io.wcm.osgi.wrapper</groupId>
         <artifactId>io.wcm.osgi.wrapper.rxjava</artifactId>
-        <version>1.0.11-0000</version>
+        <version>1.0.14-0000</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -254,12 +254,7 @@
       <dependency>
         <groupId>com.damnhandy</groupId>
         <artifactId>handy-uri-templates</artifactId>
-        <version>2.0.3-expandPartial-150713</version>
-      </dependency>
-      <dependency>
-        <groupId>io.wcm.osgi.wrapper</groupId>
-        <artifactId>io.wcm.osgi.wrapper.handy-uri-templates</artifactId>
-        <version>2.0.3-0001</version>
+        <version>2.0.4</version>
       </dependency>
       
       <!-- Templating -->
@@ -560,13 +555,6 @@
             </reports>
           </reportSet>
         </reportSets>
-      </plugin>
-
-      <!-- Downgrade to 2.6 to solve conflict with maven-bundle-plugin/baseline check when compiling against Java 7 -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-        <version>2.6</version>
       </plugin>
 
     </plugins>
