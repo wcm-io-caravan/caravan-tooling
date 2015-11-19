@@ -106,8 +106,7 @@
       <plugin>
         <groupId>net.orfjackal.retrolambda</groupId>
         <artifactId>retrolambda-maven-plugin</artifactId>
-        <!-- Do not update to 2.0.6 due to problems in multi-project builds -->
-        <version>2.0.4</version>
+        <version>2.0.6</version>
         <executions>
           <execution>
             <goals>
