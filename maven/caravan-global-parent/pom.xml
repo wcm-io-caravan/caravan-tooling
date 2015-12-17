@@ -31,7 +31,7 @@
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>6-SNAPSHOT</version>
+  <version>8-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
@@ -101,43 +101,6 @@
 
   <build>
     <plugins>
-
-      <!-- Backport Java 8 language features to JDK 1.7 using bytecode manipulation -->
-      <plugin>
-        <groupId>net.orfjackal.retrolambda</groupId>
-        <artifactId>retrolambda-maven-plugin</artifactId>
-        <version>2.0.6</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>process-main</goal>
-              <goal>process-test</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Make sure to not use non Java 1.7 API calls -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <version>1.14</version>
-        <configuration>
-          <signature>
-            <groupId>org.codehaus.mojo.signature</groupId>
-            <artifactId>java17</artifactId>
-            <version>1.0</version>
-          </signature>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
 
       <!-- Do not generate site (only for this pom) -->
       <plugin>
@@ -301,20 +264,6 @@
                         <versionRange>[2.1.0,)</versionRange>
                         <goals>
                           <goal>validate</goal>
-                        </goals>
-                      </pluginExecutionFilter>
-                      <action>
-                        <ignore />
-                      </action>
-                    </pluginExecution>
-                    <pluginExecution>
-                      <pluginExecutionFilter>
-                        <groupId>net.orfjackal.retrolambda</groupId>
-                        <artifactId>retrolambda-maven-plugin</artifactId>
-                        <versionRange>[1.8.0,)</versionRange>
-                        <goals>
-                          <goal>process-main</goal>
-                          <goal>process-test</goal>
                         </goals>
                       </pluginExecutionFilter>
                       <action>
