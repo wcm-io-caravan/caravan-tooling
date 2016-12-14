@@ -11,6 +11,7 @@ Overview of wcm.io Caravan modules by category:
 * [HAL](hal/)
 * [I/O](io/)
 * [JAX-RS](jaxrs/)
+* [JAX-WS](jaxws/)
 * [Pipeline](pipeline/)
 * [Testing](testing/)
 * [Packaging](packaging/)
