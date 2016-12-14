@@ -25,7 +25,7 @@
   <parent>
     <groupId>io.wcm.caravan</groupId>
     <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <relativePath>../../parent_toplevel/pom.xml</relativePath>
   </parent>
 
@@ -92,8 +92,8 @@
 
       <!-- do not generate eclipse project files -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
+        <groupId>io.wcm.devops.maven.plugins</groupId>
+        <artifactId>eclipse-maven-plugin</artifactId>
         <inherited>true</inherited>
         <configuration>
           <skip>true</skip>
