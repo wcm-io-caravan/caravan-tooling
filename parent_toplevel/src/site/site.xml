@@ -138,7 +138,6 @@
     </menu>
     <menu name="Contribute" inherit="top">
       <item name="Contribute" href="http://wcm.io/contribute.html" />
-      <item name="Manifest" href="http://wcm.io/manifest.html" />
       <item name="Issues" href="https://wcm-io.atlassian.net" />
       <item name="Wiki" href="https://wcm-io.atlassian.net/wiki/" />
       <item name="Mailing Lists" href="http://wcm.io/mailing-lists.html" />
