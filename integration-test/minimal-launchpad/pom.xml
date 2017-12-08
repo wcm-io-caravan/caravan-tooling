@@ -35,7 +35,8 @@
   <packaging>slingfeature</packaging>
 
   <name>Minimal Launchpad for wcm.io Caravan Integration Tests</name>
-  
+  <url>${site.url}/${site.url.module.prefix}/</url>
+
   <dependencies>
     <dependency>
       <groupId>io.wcm.caravan</groupId>
