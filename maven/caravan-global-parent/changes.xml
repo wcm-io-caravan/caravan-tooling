@@ -25,6 +25,9 @@
 
     <release version="10" date="not released">
       <action type="update" dev="sseifert">
+        Update maven-bundle-plugin and maven-sling-plugin.
+      </action>
+      <action type="update" dev="sseifert">
         Update to global-parent 19.
       </action>
     </release>
