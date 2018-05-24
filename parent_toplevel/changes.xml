@@ -25,10 +25,16 @@
 
     <release version="1.1.4" date="not released">
       <action type="update" dev="sseifert">
+        Update to caravan-global-parent 10.
+      </action>
+      <action type="update" dev="sseifert">
         maven-release-plugin: Enable OddEvenVersionPolicy.
       </action>
       <action type="update" dev="sseifert">
         Update reflow-maven-skin.
+      </action>
+      <action type="update" dev="sseifert">
+        Update test dependencies.
       </action>
     </release>
 
