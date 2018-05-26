@@ -25,7 +25,7 @@
   <parent>
     <groupId>io.wcm.caravan.maven</groupId>
     <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>9</version>
+    <version>10-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -83,7 +83,7 @@
     <site.url.module.prefix>tooling/parent_toplevel</site.url.module.prefix>
     <site.url>http://caravan.wcm.io</site.url>
     <site.deploy.id>ssh-wcm.io</site.deploy.id>
-    <site.deploy.url>scp://wcmio@wcm.io:222/var/www/caravan.wcm.io/www/</site.deploy.url>
+    <site.deploy.url></site.deploy.url>
 
   </properties>
 
@@ -384,22 +384,22 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>1.10.19</version>
+        <version>2.18.3</version>
       </dependency>
       <dependency>
         <groupId>net.javacrumbs.json-unit</groupId>
         <artifactId>json-unit</artifactId>
-        <version>1.5.1</version>
+        <version>1.29.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.sling</groupId>
         <artifactId>org.apache.sling.testing.osgi-mock</artifactId>
-        <version>1.9.2</version>
+        <version>2.3.8</version>
       </dependency>
       <dependency>
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock</artifactId>
-        <version>1.55</version>
+        <version>2.17.0</version>
         <exclusions>
           <exclusion>
             <groupId>org.apache.httpcomponents</groupId>
@@ -532,6 +532,21 @@
           </configuration>
         </plugin>
 
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <configuration>
+            <projectVersionPolicyId>OddEvenVersionPolicy</projectVersionPolicyId>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.maven.release</groupId>
+              <artifactId>maven-release-oddeven-policy</artifactId>
+              <version>2.5.3</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
       </plugins>
 
     </pluginManagement>
@@ -563,7 +578,7 @@
   <profiles>
     <!-- profile used for building releases and deployment to sonatype/maven central -->
     <profile>
-      <id>release</id>
+      <id>release-profile</id>
       <activation>
         <property>
           <name>performRelease</name>

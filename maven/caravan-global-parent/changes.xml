@@ -23,6 +23,15 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="10" date="2018-05-26">
+      <action type="update" dev="sseifert">
+        Update maven-bundle-plugin and maven-sling-plugin.
+      </action>
+      <action type="update" dev="sseifert">
+        Update to global-parent 19.
+      </action>
+    </release>
+
     <release version="9" date="2017-01-06">
       <action type="update" dev="sseifert">
         Update global-parent dependency to 13.

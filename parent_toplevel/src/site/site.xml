@@ -39,7 +39,7 @@
   <skin>
     <groupId>io.wcm.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
   </skin>
   <custom>
     <reflowSkin>
@@ -47,8 +47,6 @@
       <protocolRelativeURLs>false</protocolRelativeURLs>
       <smoothScroll>true</smoothScroll>
       <theme>default</theme>
-      <highlightJs>true</highlightJs>
-      <highlightJsTheme>github</highlightJsTheme>
       <absoluteResourceURL>http://caravan.wcm.io</absoluteResourceURL>
       <skinAttribution>false</skinAttribution>
       <brand>
@@ -138,7 +136,6 @@
     </menu>
     <menu name="Contribute" inherit="top">
       <item name="Contribute" href="http://wcm.io/contribute.html" />
-      <item name="Manifest" href="http://wcm.io/manifest.html" />
       <item name="Issues" href="https://wcm-io.atlassian.net" />
       <item name="Wiki" href="https://wcm-io.atlassian.net/wiki/" />
       <item name="Mailing Lists" href="http://wcm.io/mailing-lists.html" />
