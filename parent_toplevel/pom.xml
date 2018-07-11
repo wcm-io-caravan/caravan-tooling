@@ -399,7 +399,8 @@
       <dependency>
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock</artifactId>
-        <version>2.17.0</version>
+        <!-- Stick with version 1.x - newer versions are not compatible with the old guava version we use -->
+        <version>1.58</version>
         <exclusions>
           <exclusion>
             <groupId>org.apache.httpcomponents</groupId>
