@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.caravan.maven</groupId>
     <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>10</version>
+    <version>11-SNAPSHOT</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan</groupId>
   <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
-  <version>1.1.4</version>
+  <version>1.1.5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Toplevel Parent</name>
@@ -108,7 +108,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.sling</groupId>
-      <artifactId>org.apache.sling.testing.osgi-mock</artifactId>
+      <artifactId>org.apache.sling.testing.osgi-mock.junit4</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -384,7 +384,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>2.18.3</version>
+        <version>2.19.0</version>
       </dependency>
       <dependency>
         <groupId>net.javacrumbs.json-unit</groupId>
@@ -393,13 +393,14 @@
       </dependency>
       <dependency>
         <groupId>org.apache.sling</groupId>
-        <artifactId>org.apache.sling.testing.osgi-mock</artifactId>
-        <version>2.3.8</version>
+        <artifactId>org.apache.sling.testing.osgi-mock.junit4</artifactId>
+        <version>2.4.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock</artifactId>
-        <version>2.17.0</version>
+        <!-- Stick with version 1.x - newer versions are not compatible with the old guava version we use -->
+        <version>1.58</version>
         <exclusions>
           <exclusion>
             <groupId>org.apache.httpcomponents</groupId>
@@ -565,7 +566,7 @@
               <report>index</report>
               <report>dependencies</report>
               <report>scm</report>
-              <report>license</report>
+              <report>licenses</report>
               <report>summary</report>
             </reports>
           </reportSet>
