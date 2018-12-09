@@ -28,6 +28,9 @@
         Update to caravan-global-parent 11.
       </action>
       <action type="update" dev="sseifert">
+        Update to reflow-maven-skin 1.0.6.
+      </action>
+      <action type="update" dev="sseifert">
         Update test dependencies.
       </action>
     </release>
