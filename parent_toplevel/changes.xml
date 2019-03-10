@@ -30,6 +30,9 @@
       <action type="update" dev="sseifert">
         Update to reflow-maven-skin 1.0.6.
       </action>
+      <action type="update" dev="sseifert">
+        Update test dependencies.
+      </action>
     </release>
 
     <release version="1.1.6" date="2018-09-26">
