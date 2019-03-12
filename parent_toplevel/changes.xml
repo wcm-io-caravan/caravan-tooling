@@ -31,6 +31,9 @@
         Update to reflow-maven-skin 1.0.6.
       </action>
       <action type="update" dev="sseifert">
+        Allow HTML markup in CDATA sections in changes reports.
+      </action>
+      <action type="update" dev="sseifert">
         Update test dependencies.
       </action>
     </release>
