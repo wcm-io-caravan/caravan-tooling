@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Update to global-parent 26.
       </action>
+      <action type="update" dev="sseifert">
+        Update plugins and dependencies to latest versions.
+      </action>
     </release>
 
     <release version="11" date="2018-09-26">
