@@ -105,8 +105,7 @@
       <dependency>
         <groupId>org.apache.felix</groupId>
         <artifactId>org.apache.felix.scr.annotations</artifactId>
-        <!-- Do not update to 1.12.0 yet, it marks all SCR annotations as deprecated -->
-        <version>1.11.0</version>
+        <version>1.12.0</version>
       </dependency>
 
     </dependencies>  
@@ -172,6 +171,35 @@
               </rules>
             </configuration>
           </execution>
+          <execution>
+            <id>warn-maven-scr-annotations</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <bannedDependencies>
+                  <level>WARN</level>
+                  <excludes>
+                    <exclude>org.apache.felix:org.apache.felix.scr.annotations</exclude>
+                  </excludes>
+                  <message>
+******************************************************************************
+
+  Your project is using Felix SCR annotations for OSGi Declarative Services.
+
+  Felix SCR annotations are deprecated:
+    org.apache.felix:org.apache.felix.scr.annotations
+  
+  Please switch to OSGi Service Component annotations.
+
+*********************************************************************
+
+</message>
+                </bannedDependencies>
+              </rules>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
@@ -219,7 +247,7 @@
             <dependency>
               <groupId>org.apache.felix</groupId>
               <artifactId>org.apache.felix.scr.annotations</artifactId>
-              <version>1.11.0</version>
+              <version>1.12.0</version>
             </dependency>
           </dependencies>
         </plugin>
