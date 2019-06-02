@@ -49,7 +49,7 @@
 
   <organization>
     <name>wcm.io Caravan</name>
-    <url>http://caravan.wcm.io</url>
+    <url>https://caravan.wcm.io</url>
   </organization>
 
   <issueManagement>
@@ -81,7 +81,7 @@
 
     <!-- site settings -->
     <site.url.module.prefix>tooling/parent_toplevel</site.url.module.prefix>
-    <site.url>http://caravan.wcm.io</site.url>
+    <site.url>https://caravan.wcm.io</site.url>
     <site.deploy.id>ssh-wcm.io</site.deploy.id>
     <site.deploy.url />
 

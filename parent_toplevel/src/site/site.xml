@@ -26,11 +26,11 @@
 
   <bannerLeft>
     <name><![CDATA[<img src="http://wcm.io/images/favicon-16@3x.png"/> wcm.io Caravan]]></name>
-    <href>http://caravan.wcm.io</href>
+    <href>https://caravan.wcm.io</href>
   </bannerLeft>
 
   <bannerRight>
-    <name><![CDATA[<img src="http://caravan.wcm.io/images/caravan.gif" style="width:350px"/>]]></name>
+    <name><![CDATA[<img src="https://caravan.wcm.io/images/caravan.gif" style="width:350px"/>]]></name>
   </bannerRight>
 
   <publishDate position="bottom" format="yyyy-MM-dd" />
@@ -39,7 +39,7 @@
   <skin>
     <groupId>io.wcm.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7-SNAPSHOT</version>
   </skin>
   <custom>
     <reflowSkin>
@@ -47,12 +47,12 @@
       <protocolRelativeURLs>false</protocolRelativeURLs>
       <smoothScroll>true</smoothScroll>
       <theme>default</theme>
-      <absoluteResourceURL>http://caravan.wcm.io</absoluteResourceURL>
+      <absoluteResourceURL>https://caravan.wcm.io</absoluteResourceURL>
       <skinAttribution>false</skinAttribution>
       <brand>
         <!-- Brand text in top-left part of the site -->
         <name>wcm.io Caravan</name>
-        <href>http://caravan.wcm.io</href>
+        <href>https://caravan.wcm.io</href>
       </brand>
       <slogan>JSON Data Pipelining Infrastructure</slogan>
       <titleTemplate>%2$s | %1$s</titleTemplate>
@@ -111,28 +111,28 @@
     </links>
 
     <breadcrumbs>
-      <item name="wcm.io Caravan" href="http://caravan.wcm.io" />
+      <item name="wcm.io Caravan" href="https://caravan.wcm.io" />
     </breadcrumbs>
 
     <menu name="Main" inherit="top">
-      <item name="Home" href="http://caravan.wcm.io" />
-      <item name="Platforms" href="http://caravan.wcm.io/platforms.html" />
-      <item name="Maven Repositories" href="http://caravan.wcm.io/maven.html" />
+      <item name="Home" href="https://caravan.wcm.io" />
+      <item name="Platforms" href="https://caravan.wcm.io/platforms.html" />
+      <item name="Maven Repositories" href="https://caravan.wcm.io/maven.html" />
       <item name="GitHub project" href="http://github.com/wcm-io-caravan" />
       <item name="Subprojects" href="http://wcm.io/subprojects.html" />
-      <item name="License" href="http://caravan.wcm.io/license.html" />
+      <item name="License" href="https://caravan.wcm.io/license.html" />
       <item name="Imprint" href="http://wcm.io/imprint.html" />
     </menu>
     <menu name="Categories" inherit="top">
-      <item name="Commons" href="http://caravan.wcm.io/commons/"/>
-      <item name="HAL" href="http://caravan.wcm.io/hal/"/>
-      <item name="I/O" href="http://caravan.wcm.io/io/"/>
-      <item name="JAX-RS" href="http://caravan.wcm.io/jaxrs/"/>
-      <item name="JAX-WS" href="http://caravan.wcm.io/jaxws/"/>
-      <item name="Pipeline" href="http://caravan.wcm.io/pipeline/"/>
-      <item name="Testing" href="http://caravan.wcm.io/testing/"/>
-      <item name="Packaging" href="http://caravan.wcm.io/packaging/"/>
-      <item name="Tooling" href="http://caravan.wcm.io/tooling/"/>
+      <item name="Commons" href="https://caravan.wcm.io/commons/"/>
+      <item name="HAL" href="https://caravan.wcm.io/hal/"/>
+      <item name="I/O" href="https://caravan.wcm.io/io/"/>
+      <item name="JAX-RS" href="https://caravan.wcm.io/jaxrs/"/>
+      <item name="JAX-WS" href="https://caravan.wcm.io/jaxws/"/>
+      <item name="Pipeline" href="https://caravan.wcm.io/pipeline/"/>
+      <item name="Testing" href="https://caravan.wcm.io/testing/"/>
+      <item name="Packaging" href="https://caravan.wcm.io/packaging/"/>
+      <item name="Tooling" href="https://caravan.wcm.io/tooling/"/>
     </menu>
     <menu name="Contribute" inherit="top">
       <item name="Contribute" href="http://wcm.io/contribute.html" />
