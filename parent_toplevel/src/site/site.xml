@@ -25,7 +25,7 @@
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 
   <bannerLeft>
-    <name><![CDATA[<img src="http://wcm.io/images/favicon-16@3x.png"/> wcm.io Caravan]]></name>
+    <name><![CDATA[<img src="https://wcm.io/images/favicon-16@3x.png"/> wcm.io Caravan]]></name>
     <href>https://caravan.wcm.io</href>
   </bannerLeft>
 
@@ -119,9 +119,9 @@
       <item name="Platforms" href="https://caravan.wcm.io/platforms.html" />
       <item name="Maven Repositories" href="https://caravan.wcm.io/maven.html" />
       <item name="GitHub project" href="http://github.com/wcm-io-caravan" />
-      <item name="Subprojects" href="http://wcm.io/subprojects.html" />
+      <item name="Subprojects" href="https://wcm.io/subprojects.html" />
       <item name="License" href="https://caravan.wcm.io/license.html" />
-      <item name="Imprint" href="http://wcm.io/imprint.html" />
+      <item name="Imprint" href="https://wcm.io/imprint.html" />
     </menu>
     <menu name="Categories" inherit="top">
       <item name="Commons" href="https://caravan.wcm.io/commons/"/>
@@ -135,10 +135,10 @@
       <item name="Tooling" href="https://caravan.wcm.io/tooling/"/>
     </menu>
     <menu name="Contribute" inherit="top">
-      <item name="Contribute" href="http://wcm.io/contribute.html" />
+      <item name="Contribute" href="https://wcm.io/contribute.html" />
       <item name="Issues" href="https://wcm-io.atlassian.net" />
       <item name="Wiki" href="https://wcm-io.atlassian.net/wiki/" />
-      <item name="Mailing Lists" href="http://wcm.io/mailing-lists.html" />
+      <item name="Mailing Lists" href="https://wcm.io/mailing-lists.html" />
       <item name="Continuous Integration" href="https://travis-ci.org/wcm-io-caravan" />
       <item name="Fork on GitHub" href="http://github.com/wcm-io-caravan" />
     </menu>
