@@ -25,18 +25,18 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>22</version>
+    <version>26</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>12-SNAPSHOT</version>
+  <version>12</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
   <description>Global parent for Maven artifact hierarchy for wcm.io Caravan projects. Defines plugins and general Maven settings.</description>
-  <url>http://caravan.wcm.io/</url>
+  <url>https://caravan.wcm.io/</url>
 
   <scm>
     <connection>scm:git:https://github.com/wcm-io-caravan/caravan-tooling.git</connection>
@@ -47,9 +47,9 @@
 
   <properties>
 
-    <!-- Target Java 8 to support new language features like Lambda expressions -->
-    <build.compiler.source>1.8</build.compiler.source>
-    <build.compiler.target>1.8</build.compiler.target>
+    <!-- Java version -->
+    <java.version>1.8</java.version>
+    <build.compiler.release>8</build.compiler.release>
 
     <!-- Default launchpad parameters -->
     <launchpad.url>http://localhost:8080</launchpad.url>
@@ -72,13 +72,13 @@
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.service.component.annotations</artifactId>
-      <version>1.3.0</version>
+      <version>1.4.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.service.metatype.annotations</artifactId>
-      <version>1.3.0</version>
+      <version>1.4.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -182,7 +182,7 @@
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
-          <version>3.5.1</version>
+          <version>4.2.0</version>
           <extensions>true</extensions>
           <executions>
             <!-- Configure extra execution of 'manifest' in process-classes phase to make sure SCR metadata is generated before unit test runs -->
@@ -214,12 +214,7 @@
             <dependency>
               <groupId>org.apache.felix</groupId>
               <artifactId>org.apache.felix.scr.bnd</artifactId>
-              <version>1.9.0</version>
-            </dependency>
-            <dependency>
-              <groupId>org.apache.felix</groupId>
-              <artifactId>org.apache.felix.scr.generator</artifactId>
-              <version>1.18.0</version>
+              <version>1.9.4</version>
             </dependency>
             <dependency>
               <groupId>org.apache.felix</groupId>
@@ -230,8 +225,8 @@
         </plugin>
         <plugin>
           <groupId>org.apache.sling</groupId>
-          <artifactId>maven-sling-plugin</artifactId>
-          <version>2.3.6</version>
+          <artifactId>sling-maven-plugin</artifactId>
+          <version>2.4.0</version>
           <!-- Default configuration for deploying bundles into running Launchpad instance -->
           <configuration>
             <slingUrl>${launchpad.url}/system/console</slingUrl>
@@ -244,7 +239,7 @@
         <plugin>
           <groupId>io.wcm.maven.plugins</groupId>
           <artifactId>cq-maven-plugin</artifactId>
-          <version>1.0.4</version>
+          <version>1.0.6</version>
           <configuration>
             <slingPluginVersion>2.1.0</slingPluginVersion>
             <slingConsoleUrl>${launchpad.url}/system/console</slingConsoleUrl>

@@ -20,4 +20,4 @@ Overview of wcm.io Caravan modules by category:
 
 ### Subprojects
 
-List of [Subprojects](http://wcm.io/subprojects.html) of wcm.io.
+List of [Subprojects](https://wcm.io/subprojects.html) of wcm.io.
