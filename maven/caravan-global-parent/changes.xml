@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Update to Maven Bundle Plugin 4.2.1.
       </action>
+      <action type="update" dev="sseifert">
+        Update to global-parent 28.
+      </action>
     </release>
 
     <release version="12" date="2019-06-03">
