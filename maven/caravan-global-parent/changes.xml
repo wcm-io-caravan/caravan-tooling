@@ -25,6 +25,12 @@
 
     <release version="13" date="not released">
       <action type="update" dev="sseifert">
+        Update to OSGi dependencies from 2018.
+      </action>
+      <action type="update" dev="sseifert">
+        Do no longer include OSGi artifacts as implicit provided dependencies. Each project should include the indivial OSGi artifacts they depend on as compile dependency (to support unit tests).
+      </action>
+      <action type="update" dev="sseifert">
         Update to global-parent 37.
       </action>
       <action type="update" dev="sseifert">
