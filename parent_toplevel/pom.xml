@@ -487,6 +487,32 @@
       <plugins>
 
         <plugin>
+          <groupId>biz.aQute.bnd</groupId>
+          <artifactId>bnd-maven-plugin</artifactId>
+          <configuration>
+            <bnd>
+              Bundle-Category: wcm.io Caravan
+              Bundle-Vendor: wcm.io Caravan
+              Bundle-Name: wcm.io Caravan ${project.name}
+              Bundle-DocURL: ${project.url}
+            </bnd>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>biz.aQute.bnd</groupId>
+          <artifactId>bnd-baseline-maven-plugin</artifactId>
+          <configuration>
+            <includeDistributionManagement>false</includeDistributionManagement>
+            <fullReport>true</fullReport>
+            <diffignores>
+              <!-- ignore Bundle-Version header for baseline, i.e. no enforcement of specific bundle versions -->
+              <diffignore>Bundle-Version</diffignore>
+            </diffignores>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
           <extensions>true</extensions>

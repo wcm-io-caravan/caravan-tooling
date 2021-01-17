@@ -24,6 +24,9 @@
   <body>
 
     <release version="13" date="not released">
+      <action type="add" dev="sseifert">
+        Add bnd Maven plugins.
+      </action>
       <action type="update" dev="sseifert">
         Update to OSGi dependencies from 2018.
       </action>

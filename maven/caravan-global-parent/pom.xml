@@ -25,7 +25,7 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>36-SNAPSHOT</version>
+    <version>36</version>
     <relativePath />
   </parent>
 
@@ -263,6 +263,68 @@
       <plugins>
 
         <plugin>
+          <groupId>biz.aQute.bnd</groupId>
+          <artifactId>bnd-maven-plugin</artifactId>
+          <version>${bnd.version}</version>
+          <configuration>
+            <bnd>
+              <!-- Add build number and timestamp -->
+              Scm-Revision: ${buildNumber} at ${timestamp}
+
+              <!-- Do not set Bundle-Developers -->
+              Bundle-Developers:
+
+              <!-- Do not set Bundle-DocURL because the maven auto-generated URLs are often not useful -->
+              Bundle-DocURL:
+
+              <!-- Export all versioned packages by default -->
+              -exportcontents: ${packages;VERSIONED}
+
+              <!-- Use "SNAPSHOT" suffix for snapshot bundle versions -->
+              -snapshot: SNAPSHOT
+
+              <!-- Remove Private-Package header as it may contain lists of all SLING-INF folders -->
+              -removeheaders: Private-Package
+
+              <!-- Suppress warnings in Eclipse about generate maven properties not available -->
+              -fixupmessages.buildNumber: 'No translation found for macro: buildNumber'
+              -fixupmessages.timestamp: 'No translation found for macro: timestamp'
+
+              <!-- reproducible builds (https://github.com/bndtools/bnd/issues/3521) -->
+              -noextraheaders: true
+
+              <!-- Do not create imports for java.* as this leads to failed builds with AEM cloud service -->
+              -noimportjava: true
+            </bnd>
+          </configuration>
+          <executions>
+            <execution>
+              <id>bnd-process</id>
+              <goals>
+                <goal>bnd-process</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>biz.aQute.bnd</groupId>
+          <artifactId>bnd-baseline-maven-plugin</artifactId>
+          <version>${bnd.version}</version>
+          <configuration>
+            <includeDistributionManagement>false</includeDistributionManagement>
+            <fullReport>true</fullReport>
+          </configuration>
+          <executions>
+            <execution>
+              <id>bnd-baseline</id>
+              <goals>
+                <goal>baseline</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
           <version>5.1.1</version>
@@ -283,6 +345,7 @@
             <exportScr>true</exportScr>
             <instructions>
               <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+              <Bundle-Description>${project.description}</Bundle-Description>
               <!-- Enable processing of OSGI DS component annotations -->
               <_dsannotations>*</_dsannotations>
               <!-- Enable processing of OSGI metatype annotations -->
@@ -306,6 +369,7 @@
             </dependency>
           </dependencies>
         </plugin>
+
         <plugin>
           <groupId>org.apache.sling</groupId>
           <artifactId>sling-maven-plugin</artifactId>
