@@ -1,6 +1,6 @@
 <img src="https://wcm.io/images/favicon-16@2x.png"/> wcm.io Caravan Tooling
 ======
-[![Build Status](https://travis-ci.org/wcm-io-caravan/caravan-tooling.png?branch=develop)](https://travis-ci.org/wcm-io-caravan/caravan-tooling)
+[![Build Status](https://travis-ci.com/wcm-io-caravan/caravan-tooling.png?branch=develop)](https://travis-ci.com/wcm-io-caravan/caravan-tooling)
 
 wcm.io Caravan - JSON Data Pipelining Infrastructure
 
@@ -11,7 +11,8 @@ Caravan Tooling for Maven.
 Documentation: https://caravan.wcm.io/tooling/<br/>
 Issues: https://wcm-io.atlassian.net/<br/>
 Wiki: https://wcm-io.atlassian.net/wiki/<br/>
-Continuous Integration: https://travis-ci.org/wcm-io-caravan/caravan-tooling/
+Continuous Integration: https://travis-ci.com/wcm-io-caravan/caravan-tooling/<br/>
+Commercial support: https://wcm.io/commercial-support.html
 
 
 ## Build from sources

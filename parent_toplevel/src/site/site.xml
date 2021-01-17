@@ -20,9 +20,9 @@
   -->
 
 <project name="caravan.wcm.io"
-  xmlns="http://maven.apache.org/DECORATION/1.3.0"
+  xmlns="http://maven.apache.org/DECORATION/1.8.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
 
   <bannerLeft>
     <name><![CDATA[<img src="https://wcm.io/images/favicon-16@3x.png"/> wcm.io Caravan]]></name>
@@ -39,7 +39,7 @@
   <skin>
     <groupId>io.wcm.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.12</version>
   </skin>
   <custom>
     <reflowSkin>
@@ -121,7 +121,9 @@
       <item name="GitHub project" href="http://github.com/wcm-io-caravan" />
       <item name="Subprojects" href="https://wcm.io/subprojects.html" />
       <item name="License" href="https://caravan.wcm.io/license.html" />
+      <item name="Commercial Support" href="https://wcm.io/commercial-support.html" />
       <item name="Imprint" href="https://wcm.io/imprint.html" />
+      <item name="Privacy Policy" href="https://wcm.io/privacy.html" />
     </menu>
     <menu name="Categories" inherit="top">
       <item name="Commons" href="https://caravan.wcm.io/commons/"/>
@@ -139,7 +141,7 @@
       <item name="Issues" href="https://wcm-io.atlassian.net" />
       <item name="Wiki" href="https://wcm-io.atlassian.net/wiki/" />
       <item name="Mailing Lists" href="https://wcm.io/mailing-lists.html" />
-      <item name="Continuous Integration" href="https://travis-ci.org/wcm-io-caravan" />
+      <item name="Continuous Integration" href="https://travis-ci.com/wcm-io-caravan" />
       <item name="Fork on GitHub" href="http://github.com/wcm-io-caravan" />
     </menu>
     <menu name="Maven documentation" inherit="top" ref="reports"/>
