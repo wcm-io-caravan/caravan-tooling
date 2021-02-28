@@ -377,6 +377,13 @@
 
       <!-- Testing -->
       <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.7.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.13.1</version>
@@ -384,6 +391,12 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
+        <!-- Stick with 2.25.1 until we switch to JUnit 5 -->
+        <version>2.25.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
         <!-- Stick with 2.25.1 until we switch to JUnit 5 -->
         <version>2.25.1</version>
       </dependency>
