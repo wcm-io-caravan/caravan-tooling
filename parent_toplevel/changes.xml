@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Update to reflow-maven-skin 1.1.0.
       </action>
+      <action type="update" dev="sseifert">
+        Update to caravan-global-parent 14.
+      </action>
     </release>
 
     <release version="1.2.0" date="2021-01-17">
