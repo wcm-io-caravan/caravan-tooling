@@ -128,6 +128,7 @@
     <menu name="Categories" inherit="top">
       <item name="Commons" href="https://caravan.wcm.io/commons/"/>
       <item name="HAL" href="https://caravan.wcm.io/hal/"/>
+      <item name="Rhyme" href="https://caravan.wcm.io/rhyme/"/>
       <item name="I/O" href="https://caravan.wcm.io/io/"/>
       <item name="JAX-RS" href="https://caravan.wcm.io/jaxrs/"/>
       <item name="JAX-WS" href="https://caravan.wcm.io/jaxws/"/>
