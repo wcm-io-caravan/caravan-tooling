@@ -25,7 +25,7 @@
   <parent>
     <groupId>io.wcm.caravan</groupId>
     <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
-    <version>1.1.9-SNAPSHOT</version>
+    <version>1.2.1-SNAPSHOT</version>
     <relativePath>../../parent_toplevel/pom.xml</relativePath>
   </parent>
 
@@ -74,6 +74,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <configuration>
+          <skip>true</skip>
           <skipDeploy>true</skipDeploy>
         </configuration>
       </plugin>

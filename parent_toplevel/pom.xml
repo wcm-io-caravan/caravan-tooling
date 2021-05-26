@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.caravan.maven</groupId>
     <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>13</version>
+    <version>14-SNAPSHOT</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan</groupId>
   <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Toplevel Parent</name>
@@ -57,11 +57,6 @@
     <url>https://wcm-io.atlassian.net/browse/</url>
   </issueManagement>
 
-  <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.com/wcm-io-caravan</url>
-  </ciManagement>
-
   <developers>
     <developer>
       <name>wcm.io Community</name>
@@ -83,7 +78,7 @@
     <site.url.module.prefix>tooling/parent_toplevel</site.url.module.prefix>
     <site.url>https://caravan.wcm.io</site.url>
     <site.deploy.id>ssh-wcm.io</site.deploy.id>
-    <site.deploy.url />
+    <site.deploy.url>scm:git:https://github.com/wcm-io-caravan/wcm-io-caravan.github.io.git</site.deploy.url>
 
   </properties>
 
@@ -377,6 +372,13 @@
 
       <!-- Testing -->
       <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.7.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.13.1</version>
@@ -384,6 +386,12 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
+        <!-- Stick with 2.25.1 until we switch to JUnit 5 -->
+        <version>2.25.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
         <!-- Stick with 2.25.1 until we switch to JUnit 5 -->
         <version>2.25.1</version>
       </dependency>
@@ -543,7 +551,8 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <configuration>
-            <excludePackageNames>*.impl</excludePackageNames>
+            <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
+            <notimestamp>true</notimestamp>
           </configuration>
         </plugin>
 
@@ -623,6 +632,19 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <!-- select non-aggregate reports -->
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
     </plugins>
   </reporting>
 
@@ -675,7 +697,7 @@
     <site>
       <id>${site.deploy.id}</id>
       <name>Maven Site Deployment</name>
-      <url>${site.deploy.url}${site.url.module.prefix}</url>
+      <url>${site.deploy.url}/${site.url.module.prefix}</url>
     </site>
   </distributionManagement>
 

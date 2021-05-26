@@ -9,6 +9,7 @@ Overview of wcm.io Caravan modules by category:
 
 * [Commons](commons/)
 * [HAL](hal/)
+* [Rhyme](rhyme/)
 * [I/O](io/)
 * [JAX-RS](jaxrs/)
 * [JAX-WS](jaxws/)

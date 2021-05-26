@@ -39,7 +39,7 @@
   <skin>
     <groupId>io.wcm.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>1.0.12</version>
+    <version>1.1.0</version>
   </skin>
   <custom>
     <reflowSkin>
@@ -120,14 +120,15 @@
       <item name="Maven Repositories" href="https://caravan.wcm.io/maven.html" />
       <item name="GitHub project" href="http://github.com/wcm-io-caravan" />
       <item name="Subprojects" href="https://wcm.io/subprojects.html" />
-      <item name="License" href="https://caravan.wcm.io/license.html" />
+      <item name="License" href="http://www.apache.org/licenses/LICENSE-2.0.txt" />
       <item name="Commercial Support" href="https://wcm.io/commercial-support.html" />
-      <item name="Imprint" href="https://wcm.io/imprint.html" />
+      <item name="Imprint" href="https://diva-e.com/en/imprint/" />
       <item name="Privacy Policy" href="https://wcm.io/privacy.html" />
     </menu>
     <menu name="Categories" inherit="top">
       <item name="Commons" href="https://caravan.wcm.io/commons/"/>
       <item name="HAL" href="https://caravan.wcm.io/hal/"/>
+      <item name="Rhyme" href="https://caravan.wcm.io/rhyme/"/>
       <item name="I/O" href="https://caravan.wcm.io/io/"/>
       <item name="JAX-RS" href="https://caravan.wcm.io/jaxrs/"/>
       <item name="JAX-WS" href="https://caravan.wcm.io/jaxws/"/>
@@ -141,7 +142,6 @@
       <item name="Issues" href="https://wcm-io.atlassian.net" />
       <item name="Wiki" href="https://wcm-io.atlassian.net/wiki/" />
       <item name="Mailing Lists" href="https://wcm.io/mailing-lists.html" />
-      <item name="Continuous Integration" href="https://travis-ci.com/wcm-io-caravan" />
       <item name="Fork on GitHub" href="http://github.com/wcm-io-caravan" />
     </menu>
     <menu name="Maven documentation" inherit="top" ref="reports"/>
