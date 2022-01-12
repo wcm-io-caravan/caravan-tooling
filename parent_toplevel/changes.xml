@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Update to caravan-global-parent 15.
       </action>
+      <action type="update" dev="sseifert">
+        Set SonarCloud properties.
+      </action>
     </release>
 
     <release version="1.2.2" date="2021-05-26">
