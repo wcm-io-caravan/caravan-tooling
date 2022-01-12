@@ -297,7 +297,7 @@
       <dependency>
         <groupId>org.skyscreamer</groupId>
         <artifactId>jsonassert</artifactId>
-        <version>1.2.3</version>
+        <version>1.5.0</version>
       </dependency>
 
       <!-- Metrics -->
@@ -378,14 +378,14 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.7.1</version>
+        <version>5.8.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.13.1</version>
+        <version>4.13.2</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
@@ -402,12 +402,12 @@
       <dependency>
         <groupId>net.javacrumbs.json-unit</groupId>
         <artifactId>json-unit</artifactId>
-        <version>2.22.0</version>
+        <version>2.28.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.sling</groupId>
         <artifactId>org.apache.sling.testing.osgi-mock.junit4</artifactId>
-        <version>3.0.0</version>
+        <version>3.2.2</version>
       </dependency>
       <dependency>
         <groupId>com.github.tomakehurst</groupId>

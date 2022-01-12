@@ -30,6 +30,9 @@
       <action type="update" dev="sseifert">
         Set SonarCloud properties.
       </action>
+      <action type="update" dev="sseifert">
+        Update testing dependencies.
+      </action>
     </release>
 
     <release version="1.2.2" date="2021-05-26">
