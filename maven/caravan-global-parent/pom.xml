@@ -391,7 +391,7 @@
           <artifactId>cq-maven-plugin</artifactId>
           <version>1.1.2</version>
           <configuration>
-            <slingPluginVersion>2.1.0</slingPluginVersion>
+            <slingPluginVersion>2.4.2</slingPluginVersion>
             <slingConsoleUrl>${launchpad.url}/system/console</slingConsoleUrl>
             <slingConsoleUser>${launchpad.user}</slingConsoleUser>
             <slingConsolePassword>${launchpad.password}</slingConsolePassword>
