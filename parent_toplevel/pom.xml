@@ -550,6 +550,7 @@
           <groupId>com.amashchenko.maven.plugin</groupId>
           <artifactId>gitflow-maven-plugin</artifactId>
           <configuration>
+            <projectVersionPolicyId>OddEvenVersionPolicy</projectVersionPolicyId>
             <!-- Prefix release numbers with artifactId for GIT repo with more than one released artifact -->
             <gitFlowConfig>
               <releaseBranchPrefix>release/${project.artifactId}-</releaseBranchPrefix>
@@ -557,6 +558,13 @@
               <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
             </gitFlowConfig>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.maven.release</groupId>
+              <artifactId>maven-release-oddeven-policy</artifactId>
+              <version>${maven-release-plugin.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>external.atlassian.jgitflow</groupId>
@@ -581,7 +589,7 @@
             <dependency>
               <groupId>org.apache.maven.release</groupId>
               <artifactId>maven-release-oddeven-policy</artifactId>
-              <version>2.5.3</version>
+              <version>${maven-release-plugin.version}</version>
             </dependency>
           </dependencies>
         </plugin>

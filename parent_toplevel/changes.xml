@@ -36,6 +36,9 @@
       <action type="update" dev="sseifert">
         Remove maven-bundle-plugin baseline execution - this is done individually per module to allow gradually switch to bnd-maven-plugin.
       </action>
+      <action type="update" dev="sseifert">
+        Set OddEvenVersionPolicy for gitflow-maven-plugin.
+      </action>
     </release>
 
     <release version="1.2.2" date="2021-05-26">
