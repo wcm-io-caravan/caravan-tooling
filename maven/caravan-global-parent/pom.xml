@@ -57,7 +57,7 @@
     <launchpad.password>admin</launchpad.password>
 
     <!-- Plugin versions -->
-    <bnd.version>6.1.0</bnd.version>
+    <bnd.version>6.2.0</bnd.version>
 
   </properties>
 
