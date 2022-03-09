@@ -80,6 +80,9 @@
     <site.deploy.id>ssh-wcm.io</site.deploy.id>
     <site.deploy.url>scm:git:https://github.com/wcm-io-caravan/wcm-io-caravan.github.io.git</site.deploy.url>
 
+    <!-- Set to 'enabled' to activate org.eclipse.jdt.core.compiler.annotation.nullanalysis feature in eclipse settings -->
+    <eclipse.settings.nullanalysis>enabled</eclipse.settings.nullanalysis>
+
     <!-- SonarCloud -->
     <sonar.organization>wcm-io-caravan</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
