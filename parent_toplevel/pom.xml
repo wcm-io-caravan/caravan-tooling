@@ -89,6 +89,20 @@
   <!-- default dependencies for all projects -->
   <dependencies>
 
+    <!-- Recommended global dependency for nullability annotations -->
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spotbugs annotations -->
+    <dependency>
+      <groupId>io.wcm.tooling.spotbugs</groupId>
+      <artifactId>io.wcm.tooling.spotbugs.annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
