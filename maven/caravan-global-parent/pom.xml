@@ -57,6 +57,7 @@
     <launchpad.password>admin</launchpad.password>
 
     <!-- Plugin versions -->
+    <sling.sling-maven-plugin.version>2.4.2</sling.sling-maven-plugin.version>
     <bnd.version>6.2.0</bnd.version>
 
   </properties>
@@ -363,7 +364,7 @@
         <plugin>
           <groupId>org.apache.sling</groupId>
           <artifactId>sling-maven-plugin</artifactId>
-          <version>2.4.2</version>
+          <version>${sling.sling-maven-plugin.version}</version>
           <!-- Default configuration for deploying bundles into running Launchpad instance -->
           <configuration>
             <slingUrl>${launchpad.url}/system/console</slingUrl>
@@ -376,9 +377,9 @@
         <plugin>
           <groupId>io.wcm.maven.plugins</groupId>
           <artifactId>cq-maven-plugin</artifactId>
-          <version>1.1.2</version>
+          <version>1.1.4</version>
           <configuration>
-            <slingPluginVersion>2.4.2</slingPluginVersion>
+            <slingPluginVersion>${sling.sling-maven-plugin.version}</slingPluginVersion>
             <slingConsoleUrl>${launchpad.url}/system/console</slingConsoleUrl>
             <slingConsoleUser>${launchpad.user}</slingConsoleUser>
             <slingConsolePassword>${launchpad.password}</slingConsolePassword>
