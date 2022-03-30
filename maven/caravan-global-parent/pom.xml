@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>42</version>
+    <version>43</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>16-SNAPSHOT</version>
+  <version>16</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
