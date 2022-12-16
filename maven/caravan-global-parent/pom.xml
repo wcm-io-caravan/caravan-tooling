@@ -25,7 +25,7 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>44</version>
+    <version>50-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -48,8 +48,7 @@
   <properties>
 
     <!-- Java version -->
-    <java.version>1.8</java.version>
-    <build.compiler.release>8</build.compiler.release>
+    <java.version>11</java.version>
 
     <!-- Default launchpad parameters -->
     <launchpad.url>http://localhost:8080</launchpad.url>
