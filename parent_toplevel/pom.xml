@@ -54,7 +54,7 @@
 
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/wcm-io-caravan</url>
+    <url>https://github.com/wcm-io-caravan/${project.artifactId}/issues/</url>
   </issueManagement>
 
   <developers>
