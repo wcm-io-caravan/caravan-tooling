@@ -28,7 +28,7 @@
         Switch to Java 11 as minimum version.
       </action>
       <action type="update" dev="sseifert">
-        Update to global-parent 44.
+        Update to global-parent 54.
       </action>
     </release>
 
