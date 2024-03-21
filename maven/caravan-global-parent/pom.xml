@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>43</version>
+    <version>56</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>17-SNAPSHOT</version>
+  <version>17</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
@@ -48,8 +48,7 @@
   <properties>
 
     <!-- Java version -->
-    <java.version>1.8</java.version>
-    <build.compiler.release>8</build.compiler.release>
+    <java.version>11</java.version>
 
     <!-- Default launchpad parameters -->
     <launchpad.url>http://localhost:8080</launchpad.url>
@@ -194,7 +193,7 @@
       <extension>
         <groupId>io.wcm.maven</groupId>
         <artifactId>io.wcm.maven.global-build-tools-mixin</artifactId>
-        <version>1</version>
+        <version>2</version>
       </extension>
 
     </extensions>
