@@ -49,6 +49,11 @@
     <url>https://github.com/wcm-io-caravan/caravan-tooling/actions</url>
   </ciManagement>
 
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/wcm-io-caravan/caravan-tooling/issues/</url>
+  </issueManagement>
+
   <properties>
     <site.url.module.prefix>tooling</site.url.module.prefix>
   </properties>

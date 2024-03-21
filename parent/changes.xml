@@ -27,9 +27,6 @@
       <action type="add" dev="sseifert">
         Initial release.
       </action>
-      <action type="update" dev="sseifert">
-        Update dependencies.
-      </action>
     </release>
 
   </body>
