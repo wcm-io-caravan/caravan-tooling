@@ -25,7 +25,7 @@
   <parent>
     <groupId>io.wcm.caravan.maven</groupId>
     <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>17-SNAPSHOT</version>
+    <version>17</version>
     <relativePath>../maven/caravan-global-parent/pom.xml</relativePath>
   </parent>
 
