@@ -26,7 +26,7 @@
 
     <release version="18" date="not released">
       <action type="update" dev="sseifert">
-        Update to global-parent 61.
+        Update to global-parent 64.
       </action>
       <action type="update" dev="sseifert">
         Update plugins and dependencies to latest versions.
