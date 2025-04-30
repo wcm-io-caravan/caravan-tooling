@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>56</version>
+    <version>64</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>18-SNAPSHOT</version>
+  <version>18</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
@@ -56,8 +56,8 @@
     <launchpad.password>admin</launchpad.password>
 
     <!-- Plugin versions -->
-    <sling.sling-maven-plugin.version>2.4.2</sling.sling-maven-plugin.version>
-    <bnd.version>6.2.0</bnd.version>
+    <sling.sling-maven-plugin.version>3.0.4</sling.sling-maven-plugin.version>
+    <bnd.version>6.4.0</bnd.version>
 
   </properties>
 
@@ -376,7 +376,7 @@
         <plugin>
           <groupId>io.wcm.maven.plugins</groupId>
           <artifactId>cq-maven-plugin</artifactId>
-          <version>1.1.4</version>
+          <version>1.2.2</version>
           <configuration>
             <slingPluginVersion>${sling.sling-maven-plugin.version}</slingPluginVersion>
             <slingConsoleUrl>${launchpad.url}/system/console</slingConsoleUrl>
@@ -421,15 +421,12 @@
           </plugin>
           <!-- configure staging process at sonatype.-->
           <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
             <inherited>false</inherited>
             <extensions>true</extensions>
             <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              <!-- Deployed artifacts should go to staging to be reviewed before publish -->
-              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+              <publishingServerId>sonatype-central</publishingServerId>
             </configuration>
           </plugin>
         </plugins>
@@ -437,5 +434,25 @@
     </profile>
 
   </profiles>
+
+  <organization>
+    <name>wcm.io</name>
+    <url>https://wcm.io</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>wcm.io Community</name>
+      <organization>wcm.io</organization>
+      <organizationUrl>https://wcm.io</organizationUrl>
+    </developer>
+  </developers>
 
 </project>
