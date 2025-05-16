@@ -623,7 +623,7 @@
         <artifactId>maven-changes-plugin</artifactId>
         <configuration>
           <!-- Allow HTML markup in CDATA sections in changes reports -->
-          <escapeHTML>false</escapeHTML>
+          <escapeText>false</escapeText>
           <!-- Do not generate links to teamlist reports -->
           <teamlist>none</teamlist>
         </configuration>
