@@ -24,6 +24,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="19" date="not released">
+      <action type="update" dev="sseifert">
+        Update to global-parent 65.
+      </action>
+    </release>
+
     <release version="18" date="2025-04-30">
       <action type="update" dev="sseifert">
         Update to global-parent 64.
