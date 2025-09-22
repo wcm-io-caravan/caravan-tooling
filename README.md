@@ -1,6 +1,6 @@
 <img src="https://wcm.io/images/favicon-16@2x.png"/> wcm.io Caravan Tooling
 ======
-[![Build](https://github.com/wcm-io-caravan/caravan-tooling/workflows/Build/badge.svg?branch=develop)](https://github.com/wcm-io-caravan/caravan-tooling/actions?query=workflow%3ABuild+branch%3Adevelop)
+[![Build](https://github.com/wcm-io-caravan/caravan-tooling/actions/workflows/maven-build.yml/badge.svg?branch=develop)](https://github.com/wcm-io-caravan/caravan-tooling/actions?query=workflow%3ABuild+branch%3Adevelop)
 
 wcm.io Caravan - JSON Data Pipelining Infrastructure
 
