@@ -42,7 +42,6 @@
     <module>maven/caravan-global-parent</module>
     <module>parent_toplevel</module>
     <module>parent</module>
-    <module>integration-test/minimal-launchpad</module>
     <module>public_site</module>
   </modules>
 
