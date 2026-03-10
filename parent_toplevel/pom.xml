@@ -390,7 +390,7 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.8.2</version>
+        <version>5.14.3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -419,7 +419,7 @@
       <dependency>
         <groupId>org.apache.sling</groupId>
         <artifactId>org.apache.sling.testing.osgi-mock.junit4</artifactId>
-        <version>3.2.2</version>
+        <version>3.5.4</version>
       </dependency>
       <dependency>
         <groupId>com.github.tomakehurst</groupId>
