@@ -24,7 +24,13 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
-    <release version="1.4.4" date="not released">
+    <release version="1.5.0" date="not released">
+      <action type="add" dev="sseifert">
+        Add io.wcm.caravan:wcm-io-handy-uri-templates managed dependency to replace com.damnhandy:andy-uri-templates for compatibility with Java 21+.
+      </action>
+      <action type="remove" dev="sseifert">
+        Remove com.damnhandy:andy-uri-templates managed dependency.
+      </action>
       <action type="update" dev="sseifert">
         Enable rendering of changes reports in HTML format again by reconfiguring maven-changes-plugin 3.0.0-M3.
       </action>
