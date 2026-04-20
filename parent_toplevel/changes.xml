@@ -24,7 +24,7 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
-    <release version="1.5.0" date="not released">
+    <release version="1.5.0" date="2026-04-20">
       <action type="add" dev="sseifert">
         Add io.wcm.caravan:wcm-io-handy-uri-templates managed dependency to replace com.damnhandy:andy-uri-templates for compatibility with Java 21+.
       </action>
