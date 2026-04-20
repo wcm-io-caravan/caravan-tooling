@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>64</version>
+    <version>76</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.caravan.maven</groupId>
   <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-  <version>19-SNAPSHOT</version>
+  <version>19</version>
   <packaging>pom</packaging>
 
   <name>io.wcm.caravan.maven.caravan-global-parent</name>
@@ -317,7 +317,7 @@
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
-          <version>5.1.4</version>
+          <version>5.1.9</version>
           <extensions>true</extensions>
           <executions>
             <!-- Configure extra execution of 'manifest' in process-classes phase to make sure SCR metadata is generated before unit test runs -->
@@ -427,6 +427,7 @@
             <extensions>true</extensions>
             <configuration>
               <publishingServerId>sonatype-central</publishingServerId>
+              <deploymentName>${project.artifactId} ${project.version}</deploymentName>
             </configuration>
           </plugin>
         </plugins>

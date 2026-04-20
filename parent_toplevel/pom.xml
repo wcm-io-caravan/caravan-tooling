@@ -25,13 +25,13 @@
   <parent>
     <groupId>io.wcm.caravan.maven</groupId>
     <artifactId>io.wcm.caravan.maven.caravan-global-parent</artifactId>
-    <version>18</version>
+    <version>19-SNAPSHOT</version>
     <relativePath>../maven/caravan-global-parent/pom.xml</relativePath>
   </parent>
 
   <groupId>io.wcm.caravan</groupId>
   <artifactId>io.wcm.caravan.parent_toplevel</artifactId>
-  <version>1.4.2</version>
+  <version>1.5.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Toplevel Parent</name>
@@ -205,11 +205,6 @@
         <artifactId>commons-io</artifactId>
         <version>2.4</version>
       </dependency>
-      <dependency>
-        <groupId>commons-beanutils</groupId>
-        <artifactId>commons-beanutils</artifactId>
-        <version>1.9.2</version>
-      </dependency>
 
       <!-- Apache HTTP Client -->
       <!-- AEM 6.1 ships with this versions -->
@@ -268,11 +263,11 @@
 
       <!-- URI Template -->
       <dependency>
-        <groupId>com.damnhandy</groupId>
-        <artifactId>handy-uri-templates</artifactId>
-        <version>2.0.4</version>
+        <groupId>io.wcm.caravan</groupId>
+        <artifactId>wcm-io-handy-uri-templates</artifactId>
+        <version>2.2.0</version>
       </dependency>
-      
+
       <!-- Templating -->
       <dependency>
         <groupId>com.github.jknack</groupId>
@@ -395,7 +390,7 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.8.2</version>
+        <version>5.14.3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -424,7 +419,7 @@
       <dependency>
         <groupId>org.apache.sling</groupId>
         <artifactId>org.apache.sling.testing.osgi-mock.junit4</artifactId>
-        <version>3.2.2</version>
+        <version>3.5.4</version>
       </dependency>
       <dependency>
         <groupId>com.github.tomakehurst</groupId>
@@ -623,7 +618,7 @@
         <artifactId>maven-changes-plugin</artifactId>
         <configuration>
           <!-- Allow HTML markup in CDATA sections in changes reports -->
-          <escapeHTML>false</escapeHTML>
+          <escapeText>false</escapeText>
           <!-- Do not generate links to teamlist reports -->
           <teamlist>none</teamlist>
         </configuration>
@@ -680,6 +675,7 @@
             <extensions>true</extensions>
             <configuration>
               <publishingServerId>sonatype-central</publishingServerId>
+              <deploymentName>${project.artifactId} ${project.version}</deploymentName>
             </configuration>
           </plugin>
         </plugins>
