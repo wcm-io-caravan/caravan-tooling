@@ -24,6 +24,15 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="20" date="not released">
+      <action type="update" dev="sseifert">
+        Switch minimum Java version for build environment to Java 21. Default version for compilation remains Java 11.
+      </action>
+      <action type="update" dev="sseifert">
+        Update to global-parent 80.
+      </action>
+    </release>
+
     <release version="19" date="2026-04-20">
       <action type="update" dev="sseifert">
         Update to global-parent 76.
