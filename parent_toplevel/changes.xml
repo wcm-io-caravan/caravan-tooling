@@ -35,10 +35,10 @@
 
     <release version="1.5.0" date="2026-04-20">
       <action type="add" dev="sseifert">
-        Add io.wcm.caravan:wcm-io-handy-uri-templates managed dependency to replace com.damnhandy:andy-uri-templates for compatibility with Java 21+.
+        Add io.wcm.caravan:wcm-io-handy-uri-templates managed dependency to replace com.damnhandy:handy-uri-templates for compatibility with Java 21+.
       </action>
       <action type="remove" dev="sseifert">
-        Remove com.damnhandy:andy-uri-templates managed dependency.
+        Remove com.damnhandy:handy-uri-templates managed dependency.
       </action>
       <action type="update" dev="sseifert">
         Enable rendering of changes reports in HTML format again by reconfiguring maven-changes-plugin 3.0.0-M3.
